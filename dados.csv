@@ -1,0 +1,277 @@
+universidade;curso;campus;turno/grau;redacao;ciencias humanas;ciencias da natureza;linguagens e codigos;matematica;soma pesos;nota corte
+UFCAT;GEOGRAFIA;Unidade SEDE (Catalão);Noturno (Licenciatura);2,5;3;1;2,5;1;10;356,81
+UFCAT;MATEMÁTICA;Unidade SEDE (Catalão);Noturno (Licenciatura);1,5;1;1,5;2;4;10;408,34
+UFCAT;FÍSICA;Unidade SEDE (Catalão);Noturno (Licenciatura);1,5;1;2,5;2;3;10;440,52
+UFCAT;MATEMÁTICA INDUSTRIAL;Unidade SEDE (Catalão);Integral (Bacharelado);1,5;1;1,5;2;4;10;455,14
+UFCAT;QUÍMICA;Unidade SEDE (Catalão);Integral (Licenciatura);1,5;1;2,5;2;3;10;458,58
+UFCAT;EDUCAÇÃO DO CAMPO;Unidade SEDE (Catalão);Noturno (Licenciatura);2,5;1;3;1;2,5;10;510,47
+UFCAT;GEOGRAFIA;Unidade SEDE (Catalão);Noturno (Bacharelado);2,5;3;1;2,5;1;10;543,87
+UFCAT;FÍSICA;Unidade SEDE (Catalão);Noturno (Bacharelado);1,5;1;2,5;2;3;10;567,61
+UFCAT;LETRAS - LÍNGUA PORTUGUESA;Unidade SEDE (Catalão);Noturno (Licenciatura);2,5;2,5;1;3;1;10;576,83
+UFCAT;LETRAS - PORTUGUÊS E INGLÊS;Unidade SEDE (Catalão);Matutino (Licenciatura);2,5;2,5;1;3;1;10;586,47
+UFCAT;CIÊNCIAS BIOLÓGICAS;Unidade SEDE (Catalão);Integral (Licenciatura);2;1,5;3;2;1,5;10;596,96
+UFCAT;PEDAGOGIA;Unidade SEDE (Catalão);Noturno (Licenciatura);2,5;3;1;2,5;1;10;614,43
+UFCAT;HISTÓRIA;Unidade SEDE (Catalão);Noturno (Licenciatura);2,5;3;1;2,5;1;10;615,98
+UFCAT;ENGENHARIA DE MINAS;Unidade SEDE (Catalão);Integral (Bacharelado);1,5;1;2,5;2;3;10;621,35
+UFCAT;ABI - CIÊNCIAS SOCIAIS;Unidade SEDE (Catalão);Matutino (ABI);2,5;2;1;2,5;2;10;626,87
+UFCAT;QUÍMICA INDUSTRIAL;Unidade SEDE (Catalão);Integral (Bacharelado);1,5;1;2,5;2;3;10;634,45
+UFCAT;ENGENHARIA DE PRODUÇÃO;Unidade SEDE (Catalão);Integral (Bacharelado);1,5;1;2,5;2;3;10;641,01
+UFCAT;ABI - EDUCAÇÃO FÍSICA;Unidade SEDE (Catalão);Integral (ABI);2,5;3;1;2;1;9,5;646,16
+UFCAT;CIÊNCIAS BIOLÓGICAS;Unidade SEDE (Catalão);Integral (Bacharelado);2;1,5;3;2;1,5;10;648,86
+UFCAT;HISTÓRIA;Unidade SEDE (Catalão);Noturno (Bacharelado);2,5;3;1;2,5;1;10;665,72
+UFCAT;ADMINISTRAÇÃO;Unidade SEDE (Catalão);Noturno (Bacharelado);2,5;2;1;2,5;2;10;668,95
+UFCAT;ENGENHARIA CIVIL;Unidade SEDE (Catalão);Integral (Bacharelado);1,5;1;2,5;2;3;10;674,3
+UFCAT;ENGENHARIA MECÂNICA;Unidade SEDE (Catalão);Integral (Bacharelado);1,5;1;2,5;2;3;10;685,55
+UFCAT;ENFERMAGEM;Unidade SEDE (Catalão);Integral (Bacharelado);2;1,5;3;2;1,5;10;689,7
+UFCAT;ENGENHARIA MECATRÔNICA;Unidade SEDE (Catalão);Integral (Bacharelado);1,5;1;2,5;2;3;10;704,42
+UFCAT;SISTEMAS DE INFORMAÇÃO;Unidade SEDE (Catalão);Noturno (Bacharelado);2;1;1;2;4;10;709,79
+UFCAT;PSICOLOGIA;Unidade SEDE (Catalão);Integral (Bacharelado);2,5;3;1;2,5;1;10;720,38
+UFCAT;INTELIGÊNCIA ARTIFICIAL;Unidade SEDE (Catalão);Noturno (Bacharelado);1,5;1;1,5;2;4;10;735,11
+UFCAT;CIÊNCIA DA COMPUTAÇÃO;Unidade SEDE (Catalão);Integral (Bacharelado);2;1;1;2;4;10;745,16
+UFCAT;MEDICINA;Unidade SEDE (Catalão);Integral (Bacharelado);2;1,5;3;2;1,5;10;797
+UFG;FILOSOFIA;Câmpus Goiás;Noturno (Licenciatura);2,5;2,5;1;3;1;10;554,12
+UFG;SERVIÇO SOCIAL;Câmpus Goiás;Noturno (Bacharelado);2;1,5;3;2;1,5;10;560,68
+UFG;GEOLOGIA;Campus Aparecida de Goiânia;Integral (Bacharelado);1,5;1;2,5;2;3;10;565,24
+UFG;MUSICOTERAPIA;Câmpus Samambaia;Matutino (Bacharelado);2;1,5;3;2;1,5;10;581,69
+UFG;ABI - MATEMÁTICA;Câmpus Samambaia;Vespertino (ABI);1,5;1;2,5;2;3;10;589,02
+UFG;DANÇA;Câmpus Samambaia;Matutino (Licenciatura);2,5;2,5;1;3;1;10;597,47
+UFG;PEDAGOGIA;Campus Goiás;Noturno (Licenciatura);2,5;2,5;1;3;1;10;599,64
+UFG;ECOLOGIA E ANÁLISE AMBIENTAL;Câmpus Samambaia;Integral (Bacharelado);1,5;1;2,5;2;3;10;601,59
+UFG;LETRAS: TRADUÇÃO E INTERPRETAÇÃO EM LIBRAS/PORTUGUÊS;Câmpus Samambaia;Matutino (Bacharelado);2,5;2,5;1;3;1;10;602,22
+UFG;MUSEOLOGIA;Câmpus Samambaia;Noturno (Bacharelado);2,5;2;1;2,5;2;10;602,97
+UFG;ABI - FILOSOFIA;Câmpus Samambaia;Matutino (ABI);2,5;2,5;1;3;1;10;605,01
+UFG;CIÊNCIAS AMBIENTAIS;Câmpus Samambaia;Integral (Bacharelado);1,5;1;2,5;2;3;10;605,37
+UFG;LETRAS: LIBRAS;Câmpus Samambaia;Matutino (Licenciatura);2,5;2,5;1;3;1;10;605,9
+UFG;ENGENHARIA DE TRANSPORTES;Campus Aparecida de Goiânia;Integral (Bacharelado);1,5;1;2,5;2;3;10;606,35
+UFG;BIBLIOTECONOMIA;Câmpus Samambaia;Matutino (Bacharelado);2,5;2;1;2,5;2;10;608,26
+UFG;LETRAS: ESPANHOL;Câmpus Samambaia;Matutino (Licenciatura);2,5;2,5;1;3;1;10;608,46
+UFG;HISTÓRIA;Câmpus Samambaia;Noturno (Bacharelado);2,5;2,5;1;3;1;10;613,25
+UFG;FILOSOFIA;Câmpus Samambaia;Noturno (Bacharelado);2,5;2,5;1;3;1;10;615,82
+UFG;GEOGRAFIA;Câmpus Samambaia;Noturno (Licenciatura);2,5;2;1;2,5;2;10;617,61
+UFG;ENGENHARIA DE MATERIAIS;Campus Aparecida de Goiânia;Integral (Bacharelado);1,5;1;2,5;2;3;10;617,64
+UFG;GEOGRAFIA;Câmpus Samambaia;Matutino (Licenciatura);2,5;2;1;2,5;2;10;618,01
+UFG;FÍSICA;Câmpus Samambaia;Noturno (Licenciatura);1,5;1;2,5;2;3;10;620,4
+UFG;QUÍMICA;Câmpus Samambaia;Noturno (Licenciatura);1,5;1;2,5;2;3;10;627,61
+UFG;LETRAS: LINGUÍSTICA;Câmpus Samambaia;Vespertino (Bacharelado);2,5;2,5;1;3;1;10;628,05
+UFG;ENGENHARIA DE ALIMENTOS;Câmpus Samambaia;Integral (Bacharelado);1,5;1;2,5;2;3;10;632,17
+UFG;ENGENHARIA FLORESTAL;Câmpus Samambaia;Integral (Bacharelado);2;1;3;2;2;10;634,16
+UFG;HISTÓRIA;Câmpus Samambaia;Noturno (Licenciatura);2,5;2,5;1;3;1;10;640,8
+UFG;ABI - CIÊNCIAS SOCIAIS;Câmpus Samambaia;Matutino (ABI);2,5;2;1;2,5;2;10;641,35
+UFG;LETRAS: PORTUGUÊS;Câmpus Samambaia;Vespertino (Licenciatura);2,5;2,5;1;3;1;10;648,06
+UFG;TEATRO;Câmpus Samambaia;Vespertino (Licenciatura);2,5;2,5;1;3;1;10;648,52
+UFG;GEOGRAFIA;Câmpus Samambaia;Matutino (Bacharelado);2,5;2;1;2,5;2;10;648,54
+UFG;ESTATÍSTICA;Câmpus Samambaia;Integral (Bacharelado);1,5;1;2,5;2;3;10;651,36
+UFG;MATEMÁTICA;Câmpus Samambaia;Noturno (Licenciatura);1,5;1;2,5;2;3;10;653,55
+UFG;CIÊNCIAS SOCIAIS - POLÍTICAS PÚBLICAS;Câmpus Samambaia;Noturno (Bacharelado);2,5;2;1;2,5;2;10;654,09
+UFG;QUÍMICA;Câmpus Samambaia;Integral (Bacharelado);1,5;1;2,5;2;3;10;654,82
+UFG;ENGENHARIA AMBIENTAL E SANITÁRIA;Câmpus Colemar Natal e Silva (Goiânia);Integral (Bacharelado);1,5;1;2,5;2;3;10;655,61
+UFG;FÍSICA;Câmpus Samambaia;Integral (Licenciatura);1,5;1;2,5;2;3;10;660,91
+UFG;ABI - EDUCAÇÃO FÍSICA;Câmpus Samambaia;Integral (ABI);2;1,5;3;2;1,5;10;661,26
+UFG;ENGENHARIA FÍSICA;Câmpus Samambaia;Integral (Bacharelado);1,5;1;2,5;2;3;10;661,29
+UFG;ADMINISTRAÇÃO;Câmpus Goiás;Noturno (Bacharelado);2,5;2;1;2,5;2;10;662,33
+UFG;PEDAGOGIA;Câmpus Colemar Natal e Silva (Goiânia);Noturno (Licenciatura);2,5;2,5;1;3;1;10;663,34
+UFG;QUÍMICA;Câmpus Samambaia;Integral (Licenciatura);1,5;1;2,5;2;3;10;664,06
+UFG;DESIGN DE PRODUTO;Câmpus Samambaia;Integral (Bacharelado);2,5;2,5;1;3;1;10;669,69
+UFG;ZOOTECNIA;Câmpus Samambaia;Integral (Bacharelado);2;1;3;2;2;10;673,32
+UFG;CIÊNCIAS BIOLÓGICAS;Câmpus Samambaia;Integral (Licenciatura);1,5;1;2,5;2;3;10;676,81
+UFG;PEDAGOGIA;Câmpus Colemar Natal e Silva (Goiânia);Matutino (Licenciatura);2,5;2,5;1;3;1;10;679,9
+UFG;AGRONOMIA;Câmpus Samambaia;Integral (Bacharelado);2;1;3;2;2;10;682,48
+UFG;ARTES VISUAIS;Câmpus Samambaia;Matutino (Licenciatura);2,5;2,5;1;3;1;10;683,15
+UFG;DIREÇÃO DE ARTE;Câmpus Samambaia;Vespertino (Bacharelado);2,5;2,5;1;3;1;10;683,76
+UFG;HISTÓRIA;Câmpus Samambaia;Matutino (Licenciatura);2,5;2,5;1;3;1;10;686,35
+UFG;FÍSICA;Câmpus Samambaia;Integral (Bacharelado);1,5;1;2,5;2;3;10;688,1
+UFG;CIÊNCIAS BIOLÓGICAS;Câmpus Samambaia;Noturno (Licenciatura);1,5;1;2,5;2;3;10;697,73
+UFG;RELAÇÕES PÚBLICAS;Câmpus Samambaia;Matutino (Bacharelado);2,5;2;1;2,5;2;10;697,79
+UFG;MATEMÁTICA APLICADA E COMPUTACIONAL;Câmpus Samambaia;Vespertino (Bacharelado);1,5;1;2,5;2;3;10;697,85
+UFG;ARTES VISUAIS;Câmpus Samambaia;Semipresencial (Licenciatura);2,5;2,5;1;3;1;10;704,73
+UFG;GESTÃO DA INFORMAÇÃO;Câmpus Samambaia;Matutino (Bacharelado);2,5;2;1;2,5;2;10;706,02
+UFG;LETRAS: PORTUGUÊS;Câmpus Samambaia;Matutino (Licenciatura);2,5;2,5;1;3;1;10;708,06
+UFG;NUTRIÇÃO;Câmpus Colemar Natal e Silva (Goiânia);Matutino (Bacharelado);2;1,5;3;2;1,5;10;709,04
+UFG;ADMINISTRAÇÃO;Câmpus Samambaia;Noturno (Bacharelado);2,5;2;1;2,5;2;10;709,85
+UFG;FARMÁCIA;Câmpus Colemar Natal e Silva (Goiânia);Integral (Bacharelado);2;1,5;3;2;1,5;10;710,32
+UFG;CIÊNCIAS BIOLÓGICAS;Câmpus Samambaia;Integral (Bacharelado);1,5;1;2,5;2;3;10;710,85
+UFG;LETRAS: ESTUDOS LITERÁRIOS;Câmpus Samambaia;Vespertino (Bacharelado);2,5;2,5;1;3;1;10;711,8
+UFG;JORNALISMO;Câmpus Samambaia;Matutino (Bacharelado);2,5;2;1;2,5;2;10;712,3
+UFG;LETRAS: INGLÊS;Câmpus Samambaia;Matutino (Licenciatura);2,5;2,5;1;3;1;10;715,76
+UFG;MEDICINA VETERINÁRIA;Câmpus Samambaia;Integral (Bacharelado);2;1;3;2;2;10;716,16
+UFG;DESIGN DE MODA;Câmpus Samambaia;Noturno (Bacharelado);2,5;2,5;1;3;1;10;716,45
+UFG;CIÊNCIAS CONTÁBEIS;Câmpus Samambaia;Noturno (Bacharelado);2,5;2;1;2,5;2;10;718,41
+UFG;DESIGN GRÁFICO E DIGITAL;Câmpus Samambaia;Vespertino (Bacharelado);2,5;2,5;1;3;1;10;721,05
+UFG;FISIOTERAPIA;Câmpus Colemar Natal e Silva (Goiânia);Integral (Bacharelado);2;1,5;3;2;1,5;10;723,42
+UFG;COMUNICAÇÃO SOCIAL - PUBLICIDADE E PROPAGANDA;Câmpus Samambaia;Vespertino (Bacharelado);2,5;2;1;2,5;2;10;725,62
+UFG;ENFERMAGEM;Câmpus Colemar Natal e Silva (Goiânia);Integral (Bacharelado);2;1,5;3;2;1,5;10;726,09
+UFG;BIOMEDICINA;Câmpus Samambaia;Integral (Bacharelado);2;1,5;3;2;1,5;10;727,98
+UFG;ARTES VISUAIS;Câmpus Samambaia;Matutino (Bacharelado);2,5;2,5;1;3;1;10;730,53
+UFG;CIÊNCIAS CONTÁBEIS;Câmpus Samambaia;Matutino (Bacharelado);2,5;2;1;2,5;2;10;731,5
+UFG;ENGENHARIA CIVIL;Câmpus Colemar Natal e Silva (Goiânia);Integral (Bacharelado);1,5;1;2,5;2;3;10;732,75
+UFG;CIÊNCIAS ECONÔMICAS;Câmpus Samambaia;Noturno (Bacharelado);2,5;2;1;2,5;2;10;737,2
+UFG;ENGENHARIA ELÉTRICA;Câmpus Colemar Natal e Silva (Goiânia);Integral (Bacharelado);1,5;1;2,5;2;3;10;740,78
+UFG;CIÊNCIAS ECONÔMICAS;Câmpus Samambaia;Matutino (Bacharelado);2,5;2;1;2,5;2;10;743,65
+UFG;BIOTECNOLOGIA;Câmpus Colemar Natal e Silva (Goiânia);Integral (Bacharelado);1,5;1;2,5;2;3;10;745,79
+UFG;ENGENHARIA DE PRODUÇÃO;Campus Aparecida de Goiânia;Integral (Bacharelado);1,5;1;2,5;2;3;10;747,75
+UFG;DIREITO;Câmpus Goiás;Noturno (Bacharelado);2,5;2;1;2,5;2;10;748,55
+UFG;ODONTOLOGIA;Câmpus Colemar Natal e Silva (Goiânia);Integral (Bacharelado);2;1,5;3;2;1,5;10;750,18
+UFG;ENGENHARIA DE COMPUTAÇÃO;Câmpus Colemar Natal e Silva (Goiânia);Integral (Bacharelado);1,5;1;2,5;2;3;10;753,33
+UFG;FÍSICA MÉDICA;Câmpus Samambaia;Integral (Bacharelado);1,5;1;2,5;2;3;10;754,97
+UFG;ARQUITETURA E URBANISMO;Câmpus Samambaia;Integral (Bacharelado);1,5;1;2,5;2;3;10;756,34
+UFG;ENGENHARIA MECÂNICA;Câmpus Samambaia;Integral (Bacharelado);1,5;1;2,5;2;3;10;758,3
+UFG;RELAÇÕES INTERNACIONAIS;Câmpus Samambaia;Matutino (Bacharelado);2,5;2;1;2,5;2;10;760
+UFG;ENGENHARIA QUÍMICA;Câmpus Samambaia;Integral (Bacharelado);1,5;1;2,5;2;3;10;761,47
+UFG;PSICOLOGIA;Câmpus Colemar Natal e Silva (Goiânia);Integral (Bacharelado);2,5;2;1;2,5;2;10;773,96
+UFG;DIREITO;Câmpus Colemar Natal e Silva (Goiânia);Matutino (Bacharelado);2,5;2;1;2,5;2;10;777,7
+UFG;DIREITO;Câmpus Colemar Natal e Silva (Goiânia);Noturno (Bacharelado);2,5;2;1;2,5;2;10;782,27
+UFG;SISTEMAS DE INFORMAÇÃO;Câmpus Samambaia;Noturno (Bacharelado);2;1;1;2;4;10;792,78
+UFG;CIÊNCIA DA COMPUTAÇÃO;Câmpus Samambaia;Integral (Bacharelado);2;1;1;2;4;10;805,56
+UFG;MEDICINA;Câmpus Colemar Natal e Silva (Goiânia);Integral (Bacharelado);2;1,5;3;2;1,5;10;810,39
+UFG;ENGENHARIA DE SOFTWARE;Câmpus Samambaia;Noturno (Bacharelado);2;1;1;2;4;10;815,83
+UFG;INTELIGÊNCIA ARTIFICIAL;Câmpus Samambaia;Integral (Bacharelado);2;1;1;2;4;10;832,95
+UFMG;CIÊNCIAS DA NATUREZA E MATEMÁTICA;Câmpus Pampulha;Noturno (Licenciatura);1;1;1;1;1;5;634,46
+UFMG;AQUACULTURA;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;647,52
+UFMG;ARQUIVOLOGIA;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;651,26
+UFMG;MUSEOLOGIA;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;655,7
+UFMG;BIBLIOTECONOMIA;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;660,38
+UFMG;TURISMO;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;663,34
+UFMG;GESTÃO DE SERVIÇOS DE SAÚDE;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;664,78
+UFMG;BIBLIOTECONOMIA;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;665,74
+UFMG;ZOOTECNIA;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;665,84
+UFMG;RADIOLOGIA;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;669,58
+UFMG;GEOGRAFIA;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;669,92
+UFMG;CIÊNCIAS SOCIOAMBIENTAIS;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;677,8
+UFMG;LETRAS;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;680,22
+UFMG;LETRAS;Câmpus Pampulha;Noturno (Licenciatura);1;1;1;1;1;5;681,94
+UFMG;PEDAGOGIA;Câmpus Pampulha;Noturno (Licenciatura);1;1;1;1;1;5;683,34
+UFMG;PEDAGOGIA;Câmpus Pampulha;Matutino (Licenciatura);1;1;1;1;1;5;683,9
+UFMG;TEATRO;Câmpus Pampulha;Matutino (Licenciatura);1;1;1;1;1;5;684,6
+UFMG;CONSERVAÇÃO E RESTAURAÇÃO DE BENS CULTURAIS MÓVEIS;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;690,72
+UFMG;AGRONOMIA;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;692,44
+UFMG;EDUCAÇÃO FÍSICA;Câmpus Pampulha;Matutino (Licenciatura);1;1;1;1;1;5;697,78
+UFMG;QUÍMICA TECNOLÓGICA;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;697,84
+UFMG;ANTROPOLOGIA E ARQUEOLOGIA;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;698,42
+UFMG;GESTÃO PÚBLICA;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;700,26
+UFMG;GEOGRAFIA;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;700,64
+UFMG;FILOSOFIA;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;702,44
+UFMG;QUÍMICA;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;702,86
+UFMG;TEATRO;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;704,7
+UFMG;MATEMÁTICA;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;704,88
+UFMG;LETRAS;Câmpus Pampulha;Matutino (Licenciatura);1;1;1;1;1;5;706,06
+UFMG;CIÊNCIAS SOCIAIS;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;706,2
+UFMG;EDUCAÇÃO FÍSICA;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;706,92
+UFMG;EDUCAÇÃO FÍSICA;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;710,46
+UFMG;FILOSOFIA;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;710,68
+UFMG;LETRAS;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;710,92
+UFMG;CIÊNCIAS DO ESTADO;Câmpus Pampulha;Vespertino (Bacharelado);1;1;1;1;1;5;713,04
+UFMG;CIÊNCIAS BIOLÓGICAS;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;713,78
+UFMG;MATEMÁTICA;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;714,32
+UFMG;ADMINISTRAÇÃO (MONTES CLAROS);Câmpus Montes Claros;Noturno (Bacharelado);1;1;1;1;1;5;715,8
+UFMG;TERAPIA OCUPACIONAL;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;715,86
+UFMG;FÍSICA;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;716,14
+UFMG;HISTÓRIA;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;716,32
+UFMG;GEOLOGIA;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;717,82
+UFMG;CIÊNCIAS ATUARIAIS;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;720,7
+UFMG;CIÊNCIAS CONTÁBEIS;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;727,18
+UFMG;FÍSICA;Câmpus Pampulha;Vespertino (Bacharelado);1;1;1;1;1;5;729,96
+UFMG;DESIGN;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;730,54
+UFMG;RELAÇÕES PÚBLICAS;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;730,78
+UFMG;FONOAUDIOLOGIA;Câmpus Pampulha;Integral (Bacharelado);1;1;1;1;1;5;732,26
+UFMG;CONTROLADORIA E FINANÇAS;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;732,58
+UFMG;QUÍMICA;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;733,78
+UFMG;HISTÓRIA;Câmpus Pampulha;Vespertino (Bacharelado);1;1;1;1;1;5;735,02
+UFMG;FARMÁCIA;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;735,82
+UFMG;ENFERMAGEM;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;737,12
+UFMG;JORNALISMO;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;739,68
+UFMG;ADMINISTRAÇÃO;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;739,9
+UFMG;CIÊNCIAS BIOLÓGICAS;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;741,28
+UFMG;ENGENHARIA CIVIL;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;743,1
+UFMG;ESTATÍSTICA;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;743,42
+UFMG;PUBLICIDADE E PROPAGANDA;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;744,94
+UFMG;NUTRIÇÃO;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;745,28
+UFMG;FARMÁCIA;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;746,12
+UFMG;ADMINISTRAÇÃO;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;746,56
+UFMG;ARQUITETURA E URBANISMO;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;747,9
+UFMG;JORNALISMO;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;752,42
+UFMG;FISIOTERAPIA;Câmpus Pampulha;Integral (Bacharelado);1;1;1;1;1;5;753,8
+UFMG;MEDICINA VETERINÁRIA;Câmpus Pampulha;Integral (Bacharelado);1;1;1;1;1;5;755,62
+UFMG;ENGENHARIA MECÂNICA;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;757,32
+UFMG;RELAÇÕES ECONÔMICAS INTERNACIONAIS;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;761,56
+UFMG;MATEMÁTICA COMPUTACIONAL;Câmpus Pampulha;Vespertino (Bacharelado);1;1;1;1;1;5;763,06
+UFMG;CIÊNCIA DE DADOS;Câmpus Pampulha;Vespertino (Bacharelado);1;1;1;1;1;5;764
+UFMG;ODONTOLOGIA;Câmpus Pampulha;Integral (Bacharelado);1;1;1;1;1;5;764,36
+UFMG;ARQUITETURA E URBANISMO;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;766,68
+UFMG;BIOMEDICINA;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;769,24
+UFMG;PSICOLOGIA;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;771,06
+UFMG;ENGENHARIA ELÉTRICA;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;771,22
+UFMG;DIREITO;Câmpus Pampulha;Noturno (Bacharelado);1;1;1;1;1;5;771,8
+UFMG;ENGENHARIA QUÍMICA;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;779,9
+UFMG;CIÊNCIA DA COMPUTAÇÃO E SISTEMAS DE INFORMAÇÃO;Câmpus Pampulha;Vespertino (Bacharelado);1;1;1;1;1;5;780,3
+UFMG;CIÊNCIAS ECONÔMICAS;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;780,92
+UFMG;ENGENHARIA MECÂNICA;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;781,34
+UFMG;DIREITO;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;783,14
+UFMG;ENGENHARIA DE COMPUTAÇÃO;Câmpus Pampulha;Vespertino (Bacharelado);1;1;1;1;1;5;791,02
+UFMG;ENGENHARIA AEROESPACIAL;Câmpus Pampulha;Matutino (Bacharelado);1;1;1;1;1;5;794,44
+UFMG;MEDICINA;Câmpus Pampulha;Integral (Bacharelado);1;1;1;1;1;5;818,5
+UFJ;AGRONOMIA;Unidade SEDE (Jataí);Integral (Bacharelado);2;1;3;2;2;10;676,61
+UFJ;BIOMEDICINA;Unidade SEDE (Jataí);Integral (Bacharelado);2;1,5;3;2;1,5;10;711,15
+UFJ;CIÊNCIA DA COMPUTAÇÃO;Unidade SEDE (Jataí);Integral (Bacharelado);2;1;1;2;4;10;732,01
+UFJ;CIÊNCIAS BIOLÓGICAS;Unidade SEDE (Jataí);Integral (Licenciatura);2;1,5;3;2;1,5;10;594,41
+UFJ;CIÊNCIAS BIOLÓGICAS;Unidade SEDE (Jataí);Integral (Bacharelado);2;1,5;3;2;1,5;10;620,29
+UFJ;DIREITO;Unidade SEDE (Jataí);Noturno (Bacharelado);2,5;2;1;2,5;2;10;751,45
+UFJ;EDUCAÇÃO FÍSICA;Unidade SEDE (Jataí);Integral (Bacharelado);2,5;3;1;2,5;1;10;602,34
+UFJ;EDUCAÇÃO FÍSICA;Unidade SEDE (Jataí);Integral (Licenciatura);2,5;3;1;2,5;1;10;610,68
+UFJ;ENFERMAGEM;Unidade SEDE (Jataí);Integral (Bacharelado);2;1,5;3;2;1;9,5;697,95
+UFJ;ENGENHARIA FLORESTAL;Unidade SEDE (Jataí);Integral (Bacharelado);2;1;3;2;2;10;573,17
+UFJ;FISIOTERAPIA;Unidade SEDE (Jataí);Integral (Bacharelado);2;1,5;3;2;1,5;10;695,5
+UFJ;FÍSICA;Unidade SEDE (Jataí);Noturno (Licenciatura);1,5;1;2,5;2;3;10;527,32
+UFJ;GEOGRAFIA;Unidade SEDE (Jataí);Noturno (Licenciatura);2,5;3;1;2,5;1;10;497,58
+UFJ;GEOGRAFIA;Unidade SEDE (Jataí);Noturno (Bacharelado);2,5;3;1;2,5;1;10;350,33
+UFJ;INTELIGÊNCIA ARTIFICIAL;Unidade SEDE (Jataí);Noturno (Bacharelado);2;1;1;2;4;10;776,42
+UFJ;LETRAS - INGLÊS;Unidade SEDE (Jataí);Noturno (Licenciatura);2,5;2,5;1;3;1;10;602,82
+UFJ;MATEMÁTICA;Unidade SEDE (Jataí);Noturno (Licenciatura);1,5;1;1,5;2;4;10;619,8
+UFJ;MEDICINA;Unidade SEDE (Jataí);Integral (Bacharelado);2;1,5;3;2;1,5;10;797,01
+UFJ;MEDICINA VETERINÁRIA;Unidade SEDE (Jataí);Integral (Bacharelado);2;1;3;2;2;10;705,22
+UFJ;PEDAGOGIA;Unidade SEDE (Jataí);Noturno (Licenciatura);3;2,5;1;2,5;1;10;610,35
+UFJ;PSICOLOGIA;Unidade SEDE (Jataí);Integral (Bacharelado);2,5;3;1;2,5;1;10;728,09
+UFJ;QUÍMICA;Unidade SEDE (Jataí);Integral (Licenciatura);1,5;1;2,5;2;3;10;472,45
+UFJ;QUÍMICA;Unidade SEDE (Jataí);Integral (Bacharelado);1,5;1;2,5;2;3;10;469,93
+UFJ;ZOOTECNIA;Unidade SEDE (Jataí);Integral (Bacharelado);2;1;3;2;2;10;611,41
+UFJ;HISTÓRIA;Unidade SEDE (Jataí);Noturno (Licenciatura);2,5;3;1;2,5;1;10;599,26
+UFJ;LETRAS - PORTUGUÊS;Unidade SEDE (Jataí);Noturno (Licenciatura);2,5;2,5;1;3;1;10;569,34
+UFJ;PEDAGOGIA;Unidade SEDE (Jataí);Matutino (Licenciatura);3;2,5;1;2,5;1;10;595,37
+UFT;ABI - LETRAS;Campus Universitário de Porto Nacional;Matutino (ABI);1;1;1;1;1;5;620,5
+UFT;ADMINISTRAÇÃO;Campus Universitário de Palmas;Noturno (Bacharelado);1;2;1;4;4;12;668,53
+UFT;AGROINDÚSTRIA;Campus Universitário de Gurupi;Noturno (Tecnológico);1;1;4;4;3;13;586,79
+UFT;AGRONOMIA;Campus Universitário de Gurupi;Integral (Bacharelado);1;1;4;4;3;13;650,67
+UFT;ARQUITETURA E URBANISMO;Campus Universitário de Palmas;Integral (Bacharelado);1;1;1;1;1;5;717,88
+UFT;BIOTECNOLOGIA;Campus Universitário de Gurupi;Integral (Bacharelado);1;1;3;4;4;13;658,23
+UFT;CIÊNCIA DA COMPUTAÇÃO;Campus Universitário de Palmas;Integral (Bacharelado);1;1;3;4;4;13;719,69
+UFT;CIÊNCIAS BIOLÓGICAS;Campus Universitário de Porto Nacional;Integral (Bacharelado);2;1;1;2;1;7;737,29
+UFT;CIÊNCIAS CONTÁBEIS;Campus Universitário de Palmas;Noturno (Bacharelado);2;3;1;4;3;13;691,88
+UFT;CIÊNCIAS ECONÔMICAS;Campus Universitário de Palmas;Noturno (Bacharelado);2;3;1;3;3;12;681,31
+UFT;CIÊNCIAS SOCIAIS;Campus Universitário de Porto Nacional;Vespertino (Bacharelado);1;4;1;2;1;9;591,39
+UFT;DIREITO;Campus Universitário de Palmas;Noturno (Bacharelado);1;4;1;4;2;12;725,36
+UFT;DIREITO;Campus Universitário de Arraias - Unidade de Buritizinho;Noturno (Bacharelado);1;4;1;4;2;12;689,89
+UFT;EDUCAÇÃO FÍSICA;Campus Universitário de Miracema;Noturno (Licenciatura);1;4;1;4;2;12;605,72
+UFT;ENFERMAGEM;Campus Universitário de Palmas;Integral (Bacharelado);1;1;4;4;3;13;717,11
+UFT;ENGENHARIA AMBIENTAL;Campus Universitário de Palmas;Integral (Bacharelado);1;2;3;2;3;11;636,4
+UFT;ENGENHARIA CIVIL;Campus Universitário de Palmas;Integral (Bacharelado);1;1;4;3;4;13;705,68
+UFT;ENGENHARIA DE ALIMENTOS;Campus Universitário de Palmas;Matutino (Bacharelado);2;1;4;2;4;13;625,18
+UFT;ENGENHARIA DE BIOPROCESSOS E BIOTECNOLOGIA;Campus Universitário de Gurupi;Integral (Bacharelado);1;1;3;4;4;13;626,72
+UFT;ENGENHARIA ELÉTRICA;Campus Universitário de Palmas;Integral (Bacharelado);1;1;3;4;4;13;677,25
+UFT;ENGENHARIA FLORESTAL;Campus Universitário de Gurupi;Integral (Bacharelado);1;1;4;3;4;13;578,92
+UFT;FILOSOFIA;Campus Universitário de Palmas;Noturno (Licenciatura);2;4;1;4;1;12;648,27
+UFT;GEOGRAFIA;Campus Universitário de Porto Nacional;Noturno (Licenciatura);1;1;1;1;1;5;554,62
+UFT;HISTÓRIA;Campus Universitário de Porto Nacional;Matutino (Licenciatura);1;4;1;4;2;12;614,66
+UFT;INTELIGÊNCIA ARTIFICIAL;Campus Universitário de Palmas;Noturno (Bacharelado);2;1,5;2;1,5;3;10;730,55
+UFT;JORNALISMO;Campus Universitário de Palmas;Noturno (Bacharelado);3;3;1;4;2;13;690,71
+UFT;MATEMÁTICA;Campus Universitário de Arraias - Unidade de Buritizinho;Matutino (Licenciatura);1;2;1;4;4;12;635,42
+UFT;MEDICINA;Campus Universitário de Palmas;Integral (Bacharelado);3;2;4;3;2;14;794,75
+UFT;MEDICINA VETERINÁRIA;Campus Universitário de Gurupi;Integral (Bacharelado);1;1;4;4;3;13;677,63
+UFT;NUTRIÇÃO;Campus Universitário de Palmas;Integral (Bacharelado);2;2;4;3;3;14;700,38
+UFT;PEDAGOGIA;Campus Universitário de Palmas;Noturno (Licenciatura);1;4;1;4;2;12;630,62
+UFT;PEDAGOGIA;Campus Universitário de Arraias - Unidade de Buritizinho;Matutino (Licenciatura);1;4;1;4;2;12;588,38
+UFT;PEDAGOGIA;Campus Universitário de Miracema;Noturno (Licenciatura);1;1;1;1;1;5;626,02
+UFT;PSICOLOGIA;Campus Universitário de Miracema;Integral (Bacharelado);1;1;4;4;3;13;687,72
+UFT;QUÍMICA;Campus Universitário de Gurupi;Noturno (Licenciatura);1;1;4;4;3;13;533,2
+UFT;RELAÇÕES INTERNACIONAIS;Campus Universitário de Porto Nacional;Vespertino (Bacharelado);3;4;1;3;1;12;710,16
+UFT;SERVIÇO SOCIAL;Campus Universitário de Miracema;Matutino (Bacharelado);1;4;1;4;2;12;581,78
+UFT;TEATRO;Campus Universitário de Palmas;Noturno (Licenciatura);1;4;1;4;2;12;610,03
+UFT;TURISMO PATRIMONIAL E SOCIOAMBIENTAL;Campus Universitário de Arraias;Noturno (Tecnológico);3;4;2;3;1;13;564,08
