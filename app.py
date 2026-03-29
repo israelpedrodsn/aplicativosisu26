@@ -16,6 +16,29 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ========================
+# 🔐 SISTEMA DE SENHA
+# ========================
+
+SENHA_CORRETA = "sisu2026"
+
+if "autenticado" not in st.session_state:
+    st.session_state["autenticado"] = False
+
+if not st.session_state["autenticado"]:
+    st.title("🔒 Acesso restrito")
+
+    senha = st.text_input("Digite a senha para acessar", type="password")
+
+    if st.button("Entrar"):
+        if senha == SENHA_CORRETA:
+            st.session_state["autenticado"] = True
+            st.rerun()
+        else:
+            st.error("Senha incorreta")
+
+    st.stop()
+
+# ========================
 # LOAD DATA
 # ========================
 
@@ -25,13 +48,13 @@ st.title("🎓 Simulador SISU")
 st.write("Veja onde você tem mais chances de passar")
 
 # ========================
-# LAYOUT PRINCIPAL
+# LAYOUT
 # ========================
 
 col_filtros, col_notas = st.columns([1, 2])
 
 # ========================
-# FILTROS (AGORA NO CORPO)
+# FILTROS
 # ========================
 
 with col_filtros:
@@ -61,7 +84,7 @@ with col_notas:
 
     col1, col2, col3, col4, col5 = st.columns(5)
 
-    redacao = col1.number_input("Redação", min_value=0.0, max_value=1000.0, value=600.0, step=None)
+    redacao = col1.number_input("Redação", min_value=0.0, max_value=1000.0, value=700.0, step=None)
     humanas = col2.number_input("Humanas", min_value=0.0, max_value=1000.0, value=600.0, step=None)
     natureza = col3.number_input("Natureza", min_value=0.0, max_value=1000.0, value=600.0, step=None)
     linguagens = col4.number_input("Linguagens", min_value=0.0, max_value=1000.0, value=600.0, step=None)
@@ -104,7 +127,7 @@ if st.button("🚀 Calcular minhas chances"):
     # TOP 3
     # ========================
 
-    st.subheader("🏆 Melhores Opções")
+    st.subheader("🏆 Cursos mais difíceis que você consegue passar")
 
     aprovados = df_result[df_result["Diferença"] >= 0]
 
@@ -138,10 +161,6 @@ if st.button("🚀 Calcular minhas chances"):
         "nota corte": "Nota de Corte"
     })
 
-    # ========================
-    # ABAS DINÂMICAS
-    # ========================
-
     df_alta = df_view[df_view["Chance"] == "Alta chance"]
     df_media = df_view[df_view["Chance"] == "Média"]
     df_baixa = df_view[df_view["Chance"] == "Baixa"]
@@ -171,3 +190,19 @@ if st.button("🚀 Calcular minhas chances"):
                 st.dataframe(tabela, hide_index=True)
     else:
         st.warning("Nenhum resultado encontrado com esses filtros.")
+
+    # ========================
+    # DOWNLOAD
+    # ========================
+
+    st.markdown("---")
+    st.subheader("📥 Exportar resultados")
+
+    csv = df_view.to_csv(index=False).encode("utf-8")
+
+    st.download_button(
+        label="📥 Baixar tabela completa (CSV)",
+        data=csv,
+        file_name="simulador_sisu_resultados.csv",
+        mime="text/csv"
+    )
