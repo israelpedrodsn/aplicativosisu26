@@ -27,6 +27,8 @@ input[type=number] {
     border: 1px solid #333;
     margin-bottom: 10px;
 }
+.green {color: #00ff88;}
+.red {color: #ff4b4b;}
 </style>
 """, unsafe_allow_html=True)
 
@@ -101,10 +103,10 @@ if simular:
     if cursos:
         df_calc = df_calc[df_calc["curso"].isin(cursos)]
 
-    # ===== TOP 3 EM CARDS =====
+    # ===== CARDS =====
     st.subheader("🏆 Melhores opções para você")
 
-    top3 = df_calc[df_calc["chance"] == "Alta chance"] \
+    top3 = df_calc[df_calc["dif"] >= 0] \
         .sort_values(by="nota corte", ascending=False) \
         .head(3)
 
@@ -112,6 +114,11 @@ if simular:
         cols = st.columns(len(top3))
 
         for i, (_, row) in enumerate(top3.iterrows()):
+
+            dif = row["dif"]
+            cor = "green" if dif >= 0 else "red"
+            sinal = "+" if dif >= 0 else ""
+
             with cols[i]:
                 st.markdown(f"""
                 <div class="card">
@@ -119,8 +126,9 @@ if simular:
                     <p><b>{row['universidade']}</b></p>
                     <p>{row['campus']}</p>
                     <hr>
-                    <p>🎯 Nota de corte: <b>{row['nota corte']:.2f}</b></p>
+                    <p>🎯 Corte: <b>{row['nota corte']:.2f}</b></p>
                     <p>📊 Sua nota: <b>{row['nota_final']:.2f}</b></p>
+                    <p class="{cor}">Diferença: <b>{sinal}{dif:.2f}</b></p>
                 </div>
                 """, unsafe_allow_html=True)
     else:
@@ -128,8 +136,6 @@ if simular:
 
     # ===== TABELA =====
     st.subheader("📈 Todos os resultados")
-
-    df_calc = df_calc.reset_index(drop=True)
 
     df_calc = df_calc.rename(columns={
         "universidade": "Universidade",
@@ -141,4 +147,8 @@ if simular:
         "chance": "Chance"
     })
 
-    st.dataframe(df_calc, use_container_width=True)
+    st.dataframe(
+        df_calc,
+        use_container_width=True,
+        hide_index=True  # 🔥 REMOVE A COLUNA DE NÚMEROS
+    )
