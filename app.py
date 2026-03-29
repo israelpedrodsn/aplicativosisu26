@@ -9,6 +9,17 @@ st.set_page_config(page_title="Simulador SISU", layout="wide")
 
 st.markdown("""
     <style>
+    /* Esconder setas do input number */
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
@@ -53,11 +64,11 @@ st.subheader("📊 Suas notas")
 
 col1, col2, col3, col4, col5 = st.columns(5)
 
-redacao = col1.number_input("Redação", min_value=0.0, max_value=1000.0, value=700.0, step=None)
-humanas = col2.number_input("Humanas", min_value=0.0, max_value=1000.0, value=600.0, step=None)
-natureza = col3.number_input("Natureza", min_value=0.0, max_value=1000.0, value=600.0, step=None)
-linguagens = col4.number_input("Linguagens", min_value=0.0, max_value=1000.0, value=600.0, step=None)
-matematica = col5.number_input("Matemática", min_value=0.0, max_value=1000.0, value=600.0, step=None)
+redacao = col1.number_input("Redação", min_value=0.0, max_value=1000.0, value=000.0)
+humanas = col2.number_input("Humanas", min_value=0.0, max_value=1000.0, value=000.0)
+natureza = col3.number_input("Natureza", min_value=0.0, max_value=1000.0, value=000.0)
+linguagens = col4.number_input("Linguagens", min_value=0.0, max_value=1000.0, value=000.0)
+matematica = col5.number_input("Matemática", min_value=0.0, max_value=1000.0, value=000.0)
 
 # ========================
 # CALCULO
