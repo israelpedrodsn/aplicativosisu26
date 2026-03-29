@@ -96,7 +96,7 @@ if st.button("🚀 Calcular minhas chances"):
     # TOP 3 INTELIGENTE
     # ========================
 
-    st.subheader("🏆 Cursos mais difíceis que você consegue passar")
+    st.subheader("🏆 Melhores Opções")
 
     aprovados = df_result[df_result["Diferença"] >= 0]
 
