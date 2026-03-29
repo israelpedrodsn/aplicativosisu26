@@ -53,11 +53,11 @@ st.subheader("📊 Suas notas")
 
 col1, col2, col3, col4, col5 = st.columns(5)
 
-redacao = col1.number_input("Redação", 0.0, 1000.0, 700.0)
-humanas = col2.number_input("Humanas", 0.0, 1000.0, 600.0)
-natureza = col3.number_input("Natureza", 0.0, 1000.0, 600.0)
-linguagens = col4.number_input("Linguagens", 0.0, 1000.0, 600.0)
-matematica = col5.number_input("Matemática", 0.0, 1000.0, 600.0)
+redacao = col1.number_input("Redação", min_value=0.0, max_value=1000.0, value=700.0, step=None)
+humanas = col2.number_input("Humanas", min_value=0.0, max_value=1000.0, value=600.0, step=None)
+natureza = col3.number_input("Natureza", min_value=0.0, max_value=1000.0, value=600.0, step=None)
+linguagens = col4.number_input("Linguagens", min_value=0.0, max_value=1000.0, value=600.0, step=None)
+matematica = col5.number_input("Matemática", min_value=0.0, max_value=1000.0, value=600.0, step=None)
 
 # ========================
 # CALCULO
@@ -96,14 +96,14 @@ if st.button("🚀 Calcular minhas chances"):
     # TOP 3 INTELIGENTE
     # ========================
 
-    st.subheader("🏆 Melhores Opções")
+    st.subheader("🏆 Cursos mais difíceis que você consegue passar")
 
     aprovados = df_result[df_result["Diferença"] >= 0]
 
     if not aprovados.empty:
         top3 = aprovados.sort_values(by="nota corte", ascending=False).head(3)
     else:
-        top3 = df_result.head(3)  # fallback
+        top3 = df_result.head(3)
 
     cols = st.columns(3)
 
@@ -114,7 +114,7 @@ if st.button("🚀 Calcular minhas chances"):
                 f"{row['Minha Nota']}",
                 f"{row['Diferença']} pts"
             )
-            st.caption(f"{row['universidade']}")
+            st.caption(f"{row['universidade']} - {row['campus']}")
 
     # ========================
     # TABELA
