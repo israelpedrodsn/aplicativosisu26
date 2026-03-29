@@ -8,22 +8,26 @@ import pandas as pd
 st.set_page_config(page_title="Simulador SISU", layout="wide")
 
 st.markdown("""
-    <style>
-    /* Esconder setas do input number */
-    input[type=number]::-webkit-inner-spin-button, 
-    input[type=number]::-webkit-outer-spin-button { 
-        -webkit-appearance: none; 
-        margin: 0; 
-    }
+<style>
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
 
-    input[type=number] {
-        -moz-appearance: textfield;
-    }
+/* esconder setinhas */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}
 
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
-    </style>
+/* centralizar títulos */
+h1, h2, h3 {
+    text-align: center;
+}
+</style>
 """, unsafe_allow_html=True)
 
 # ========================
@@ -32,49 +36,69 @@ st.markdown("""
 
 df = pd.read_csv("dados.csv", sep=";", decimal=",")
 
+# ========================
+# HEADER
+# ========================
+
 st.title("🎓 Simulador SISU")
-st.write("Veja onde você tem mais chances de passar")
+st.caption("Descubra as melhores opções com base na sua nota")
 
 # ========================
 # FILTROS
 # ========================
 
-st.sidebar.header("🔎 Filtros")
+with st.sidebar:
+    st.header("🔎 Filtros")
 
-uni = st.sidebar.selectbox(
-    "Universidade",
-    ["Todas"] + sorted(df["universidade"].unique())
-)
+    uni = st.selectbox(
+        "Universidade",
+        ["Todas"] + sorted(df["universidade"].unique())
+    )
 
-df_filtrado = df if uni == "Todas" else df[df["universidade"] == uni]
+    df_filtrado = df if uni == "Todas" else df[df["universidade"] == uni]
 
-curso = st.sidebar.selectbox(
-    "Curso",
-    ["Todos"] + sorted(df_filtrado["curso"].unique())
-)
+    curso = st.selectbox(
+        "Curso",
+        ["Todos"] + sorted(df_filtrado["curso"].unique())
+    )
 
-if curso != "Todos":
-    df_filtrado = df_filtrado[df_filtrado["curso"] == curso]
+    if curso != "Todos":
+        df_filtrado = df_filtrado[df_filtrado["curso"] == curso]
 
 # ========================
-# INPUT NOTAS
+# INPUTS BONITOS
 # ========================
 
-st.subheader("📊 Suas notas")
+st.subheader("📊 Suas notas no ENEM")
 
-col1, col2, col3, col4, col5 = st.columns(5)
+def nota_input(nome, valor_padrao):
+    col1, col2 = st.columns([3,1])
+    with col1:
+        slider = st.slider(nome, 0, 1000, int(valor_padrao))
+    with col2:
+        numero = st.number_input("", 0.0, 1000.0, float(slider), key=nome)
+    return numero
 
-redacao = col1.number_input("Redação", min_value=0.0, max_value=1000.0, value=000.0)
-humanas = col2.number_input("Humanas", min_value=0.0, max_value=1000.0, value=000.0)
-natureza = col3.number_input("Natureza", min_value=0.0, max_value=1000.0, value=000.0)
-linguagens = col4.number_input("Linguagens", min_value=0.0, max_value=1000.0, value=000.0)
-matematica = col5.number_input("Matemática", min_value=0.0, max_value=1000.0, value=000.0)
+c1, c2, c3, c4, c5 = st.columns(5)
+
+with c1:
+    redacao = nota_input("Redação", 700)
+with c2:
+    humanas = nota_input("Humanas", 600)
+with c3:
+    natureza = nota_input("Natureza", 600)
+with c4:
+    linguagens = nota_input("Linguagens", 600)
+with c5:
+    matematica = nota_input("Matemática", 600)
+
+st.divider()
 
 # ========================
 # CALCULO
 # ========================
 
-if st.button("🚀 Calcular minhas chances"):
+if st.button("🚀 Calcular minhas chances", use_container_width=True):
 
     df_result = df_filtrado.copy()
 
@@ -104,10 +128,10 @@ if st.button("🚀 Calcular minhas chances"):
     df_result = df_result.sort_values(by="Diferença", ascending=False)
 
     # ========================
-    # TOP 3 INTELIGENTE
+    # TOP 3
     # ========================
 
-    st.subheader("🏆 Melhores Opções")
+    st.subheader("🏆 Melhores cursos que você pode alcançar")
 
     aprovados = df_result[df_result["Diferença"] >= 0]
 
@@ -120,12 +144,14 @@ if st.button("🚀 Calcular minhas chances"):
 
     for i, (_, row) in enumerate(top3.iterrows()):
         with cols[i]:
-            st.metric(
-                row["curso"],
-                f"{row['Minha Nota']}",
-                f"{row['Diferença']} pts"
-            )
-            st.caption(f"{row['universidade']} - {row['campus']}")
+            st.markdown(f"""
+            ### 🎯 {row['curso']}
+            **{row['universidade']} - {row['campus']}**  
+            Nota: **{row['Minha Nota']}**  
+            Diferença: **{row['Diferença']} pts**
+            """)
+
+    st.divider()
 
     # ========================
     # TABELA
@@ -140,10 +166,6 @@ if st.button("🚀 Calcular minhas chances"):
         "campus": "Campus",
         "nota corte": "Nota de Corte"
     })
-
-    # ========================
-    # ABAS DINÂMICAS
-    # ========================
 
     df_alta = df_view[df_view["Chance"] == "Alta chance"]
     df_media = df_view[df_view["Chance"] == "Média"]
@@ -164,13 +186,13 @@ if st.button("🚀 Calcular minhas chances"):
         abas.append(df_baixa)
         nomes.append("🔴 Baixa")
 
-    st.subheader("📊 Resultados")
+    st.subheader("📊 Resultados detalhados")
 
     if abas:
         tabs = st.tabs(nomes)
 
         for tab, tabela in zip(tabs, abas):
             with tab:
-                st.dataframe(tabela, hide_index=True)
+                st.dataframe(tabela, hide_index=True, use_container_width=True)
     else:
         st.warning("Nenhum resultado encontrado com esses filtros.")
