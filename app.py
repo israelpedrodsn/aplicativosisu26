@@ -137,27 +137,7 @@ if st.button("🚀 Calcular minhas chances"):
         "campus": "Campus",
         "nota corte": "Nota de Corte"
     })
-    
-    # ========================
-    # DOWNLOAD DOS RESULTADOS
-    # ========================
 
-    st.markdown("---")
-
-    st.subheader("📥 Exportar resultados")
-
-    # dataframe completo (sem separar por chance)
-    df_download = df_view.copy()
-
-    # converter para csv
-    csv = df_download.to_csv(index=False).encode("utf-8")
-
-    st.download_button(
-        label="📥 Baixar tabela completa (CSV)",
-        data=csv,
-        file_name="simulador_sisu_resultados.csv",
-        mime="text/csv"
-    )
     # ========================
     # ABAS DINÂMICAS
     # ========================
