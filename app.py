@@ -61,7 +61,7 @@ with col_notas:
 
     col1, col2, col3, col4, col5 = st.columns(5)
 
-    redacao = col1.number_input("Redação", min_value=0.0, max_value=1000.0, value=700.0, step=None)
+    redacao = col1.number_input("Redação", min_value=0.0, max_value=1000.0, value=600.0, step=None)
     humanas = col2.number_input("Humanas", min_value=0.0, max_value=1000.0, value=600.0, step=None)
     natureza = col3.number_input("Natureza", min_value=0.0, max_value=1000.0, value=600.0, step=None)
     linguagens = col4.number_input("Linguagens", min_value=0.0, max_value=1000.0, value=600.0, step=None)
