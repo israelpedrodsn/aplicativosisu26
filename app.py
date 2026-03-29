@@ -7,7 +7,6 @@ import pandas as pd
 
 st.set_page_config(page_title="Simulador SISU", layout="wide")
 
-# esconder menu
 st.markdown("""
     <style>
     #MainMenu {visibility: hidden;}
@@ -94,12 +93,18 @@ if st.button("🚀 Calcular minhas chances"):
     df_result = df_result.sort_values(by="Diferença", ascending=False)
 
     # ========================
-    # TOP 3
+    # TOP 3 INTELIGENTE
     # ========================
 
-    st.subheader("🏆 Melhores opções")
+    st.subheader("🏆 Cursos mais difíceis que você consegue passar")
 
-    top3 = df_result.head(3)
+    aprovados = df_result[df_result["Diferença"] >= 0]
+
+    if not aprovados.empty:
+        top3 = aprovados.sort_values(by="nota corte", ascending=False).head(3)
+    else:
+        top3 = df_result.head(3)  # fallback
+
     cols = st.columns(3)
 
     for i, (_, row) in enumerate(top3.iterrows()):
@@ -150,7 +155,7 @@ if st.button("🚀 Calcular minhas chances"):
 
     st.subheader("📊 Resultados")
 
-    if abas:  # evita bug total vazio
+    if abas:
         tabs = st.tabs(nomes)
 
         for tab, tabela in zip(tabs, abas):
