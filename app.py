@@ -7,10 +7,12 @@ import pandas as pd
 
 st.set_page_config(page_title="Simulador SISU", layout="wide")
 
+# esconder menu
 st.markdown("""
     <style>
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
+    header {visibility: hidden;}
     </style>
 """, unsafe_allow_html=True)
 
@@ -20,8 +22,8 @@ st.markdown("""
 
 df = pd.read_csv("dados.csv", sep=";", decimal=",")
 
-st.title("🎓 Simulador SISU Inteligente")
-st.write("Veja onde você realmente tem chance de passar")
+st.title("🎓 Simulador SISU")
+st.write("Veja onde você tem mais chances de passar")
 
 # ========================
 # FILTROS
@@ -62,7 +64,7 @@ matematica = col5.number_input("Matemática", 0.0, 1000.0, 600.0)
 # CALCULO
 # ========================
 
-if st.button("🚀 Analisar minhas chances"):
+if st.button("🚀 Calcular minhas chances"):
 
     df_result = df_filtrado.copy()
 
@@ -78,7 +80,7 @@ if st.button("🚀 Analisar minhas chances"):
 
     def classificar(d):
         if d >= 0:
-            return "Alta"
+            return "Alta chance"
         elif d >= -10:
             return "Média"
         else:
@@ -90,25 +92,6 @@ if st.button("🚀 Analisar minhas chances"):
     df_result["Diferença"] = df_result["Diferença"].round(1)
 
     df_result = df_result.sort_values(by="Diferença", ascending=False)
-
-    # ========================
-    # INSIGHTS INTELIGENTES
-    # ========================
-
-    st.subheader("🧠 Diagnóstico")
-
-    aprovados = df_result[df_result["Diferença"] >= 0]
-    quase = df_result[(df_result["Diferença"] < 0) & (df_result["Diferença"] >= -20)]
-
-    if not aprovados.empty:
-        st.success(f"🎉 Você já passaria em {len(aprovados)} cursos!")
-
-    if not quase.empty:
-        media_falta = abs(quase["Diferença"].mean())
-        st.warning(f"📈 Você está perto! Em média faltam {round(media_falta,1)} pontos.")
-
-    if aprovados.empty and quase.empty:
-        st.error("⚠️ Nenhum curso próximo — talvez mirar estratégias diferentes.")
 
     # ========================
     # TOP 3
@@ -142,6 +125,36 @@ if st.button("🚀 Analisar minhas chances"):
         "nota corte": "Nota de Corte"
     })
 
-    st.subheader("📊 Lista completa")
+    # ========================
+    # ABAS DINÂMICAS
+    # ========================
 
-    st.dataframe(df_view, hide_index=True)
+    df_alta = df_view[df_view["Chance"] == "Alta chance"]
+    df_media = df_view[df_view["Chance"] == "Média"]
+    df_baixa = df_view[df_view["Chance"] == "Baixa"]
+
+    abas = []
+    nomes = []
+
+    if not df_alta.empty:
+        abas.append(df_alta)
+        nomes.append("🟢 Alta chance")
+
+    if not df_media.empty:
+        abas.append(df_media)
+        nomes.append("🟡 Média")
+
+    if not df_baixa.empty:
+        abas.append(df_baixa)
+        nomes.append("🔴 Baixa")
+
+    st.subheader("📊 Resultados")
+
+    if abas:  # evita bug total vazio
+        tabs = st.tabs(nomes)
+
+        for tab, tabela in zip(tabs, abas):
+            with tab:
+                st.dataframe(tabela, hide_index=True)
+    else:
+        st.warning("Nenhum resultado encontrado com esses filtros.")
