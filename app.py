@@ -8,22 +8,40 @@ import pandas as pd
 st.set_page_config(page_title="Simulador SISU", layout="wide")
 
 st.markdown("""
-    <style>
-    /* esconder setinhas */
-    input[type=number]::-webkit-inner-spin-button, 
-    input[type=number]::-webkit-outer-spin-button { 
-        -webkit-appearance: none; 
-        margin: 0; 
-    }
+<style>
 
-    input[type=number] {
-        -moz-appearance: textfield;
-    }
+/* ===== REMOVER MENU SUPERIOR (3 pontinhos) ===== */
+#MainMenu {
+    visibility: hidden;
+}
 
-    /* esconder menu e footer, MAS NÃO header */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    </style>
+/* ===== REMOVER FOOTER ===== */
+footer {
+    visibility: hidden;
+}
+
+/* ===== ESCONDER BOTÃO "Deploy" e elementos extras ===== */
+[data-testid="stToolbar"] {
+    display: none;
+}
+
+/* ===== ESCONDER BOTÃO DE "View fullscreen / settings" ===== */
+[data-testid="stDecoration"] {
+    display: none;
+}
+
+/* ===== REMOVER SETINHAS DOS INPUTS ===== */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+</style>
 """, unsafe_allow_html=True)
 
 # ========================
