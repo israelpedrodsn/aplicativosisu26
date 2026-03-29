@@ -18,20 +18,29 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+
+/* CARDS */
+.card {
+    padding: 15px;
+    border-radius: 12px;
+    background-color: #111;
+    border: 1px solid #333;
+    margin-bottom: 10px;
+}
 </style>
 """, unsafe_allow_html=True)
 
-# CARREGAR DADOS
+# DADOS
 df = pd.read_csv("dados.csv", sep=";", decimal=",")
 
 # TÍTULO
 st.title("🎓 Simulador SISU")
 st.write("Descubra onde você tem chance de passar")
 
-# ===== LAYOUT =====
+# LAYOUT
 col1, col2 = st.columns([1,1])
 
-# ===== NOTAS =====
+# NOTAS
 with col1:
     st.subheader("📊 Suas notas")
 
@@ -41,7 +50,7 @@ with col1:
     linguagens = st.number_input("Linguagens e Códigos", 0.0, 1000.0, 600.0)
     matematica = st.number_input("Matemática", 0.0, 1000.0, 700.0)
 
-# ===== FILTROS =====
+# FILTROS
 with col2:
     st.subheader("🎯 Filtros")
 
@@ -55,15 +64,15 @@ with col2:
         options=sorted(df["curso"].unique())
     )
 
-# ===== BOTÃO =====
+# BOTÃO
 simular = st.button("🚀 Simular minhas chances")
 
-# ===== EXECUÇÃO =====
+# EXECUÇÃO
 if simular:
 
     df_calc = df.copy()
 
-    # cálculo da nota
+    # cálculo
     df_calc["nota_final"] = (
         redacao * df_calc["redacao"] +
         humanas * df_calc["ciencias humanas"] +
@@ -85,15 +94,40 @@ if simular:
 
     df_calc["chance"] = df_calc["dif"].apply(classificar)
 
-    # aplicar filtros
+    # filtros
     if universidades:
         df_calc = df_calc[df_calc["universidade"].isin(universidades)]
 
     if cursos:
         df_calc = df_calc[df_calc["curso"].isin(cursos)]
 
-    # ===== RESULTADOS =====
-    st.subheader("📈 Resultados")
+    # ===== TOP 3 EM CARDS =====
+    st.subheader("🏆 Melhores opções para você")
+
+    top3 = df_calc[df_calc["chance"] == "Alta chance"] \
+        .sort_values(by="nota corte", ascending=False) \
+        .head(3)
+
+    if not top3.empty:
+        cols = st.columns(len(top3))
+
+        for i, (_, row) in enumerate(top3.iterrows()):
+            with cols[i]:
+                st.markdown(f"""
+                <div class="card">
+                    <h4>{row['curso']}</h4>
+                    <p><b>{row['universidade']}</b></p>
+                    <p>{row['campus']}</p>
+                    <hr>
+                    <p>🎯 Nota de corte: <b>{row['nota corte']:.2f}</b></p>
+                    <p>📊 Sua nota: <b>{row['nota_final']:.2f}</b></p>
+                </div>
+                """, unsafe_allow_html=True)
+    else:
+        st.warning("Nenhum curso com alta chance encontrado.")
+
+    # ===== TABELA =====
+    st.subheader("📈 Todos os resultados")
 
     df_calc = df_calc.reset_index(drop=True)
 
@@ -108,15 +142,3 @@ if simular:
     })
 
     st.dataframe(df_calc, use_container_width=True)
-
-    # ===== TOP 3 =====
-    st.subheader("🏆 Cursos mais difíceis que você passaria")
-
-    top3 = df_calc[df_calc["Chance"] == "Alta chance"] \
-        .sort_values(by="Nota de Corte", ascending=False) \
-        .head(3)
-
-    st.dataframe(
-        top3[["Universidade", "Curso", "Campus", "Nota de Corte", "Sua Nota"]],
-        use_container_width=True
-    )
