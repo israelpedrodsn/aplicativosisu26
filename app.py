@@ -5,18 +5,11 @@ import pandas as pd
 # CONFIG
 # ========================
 
-st.set_page_config(
-    page_title="Simulador SISU",
-    layout="wide"
-)
-
-# ========================
-# CSS (visual mais clean)
-# ========================
+st.set_page_config(page_title="Simulador SISU", layout="wide")
 
 st.markdown("""
     <style>
-    /* remover setinhas */
+    /* esconder setinhas */
     input[type=number]::-webkit-inner-spin-button, 
     input[type=number]::-webkit-outer-spin-button { 
         -webkit-appearance: none; 
@@ -27,22 +20,9 @@ st.markdown("""
         -moz-appearance: textfield;
     }
 
-    /* esconder menu padrão */
+    /* esconder menu e footer, MAS NÃO header */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
-
-    /* espaçamento */
-    .block-container {
-        padding-top: 2rem;
-    }
-
-    /* cards */
-    div[data-testid="stMetric"] {
-        background-color: #111;
-        padding: 15px;
-        border-radius: 12px;
-        border: 1px solid #333;
-    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -52,18 +32,14 @@ st.markdown("""
 
 df = pd.read_csv("dados.csv", sep=";", decimal=",")
 
-# ========================
-# HEADER
-# ========================
-
 st.title("🎓 Simulador SISU")
-st.caption("Compare suas notas e descubra suas melhores opções")
+st.write("Veja onde você tem mais chances de passar")
 
 # ========================
-# SIDEBAR
+# FILTROS
 # ========================
 
-st.sidebar.title("⚙️ Filtros")
+st.sidebar.header("🔎 Filtros")
 
 uni = st.sidebar.selectbox(
     "Universidade",
@@ -81,34 +57,24 @@ if curso != "Todos":
     df_filtrado = df_filtrado[df_filtrado["curso"] == curso]
 
 # ========================
-# INPUTS
+# INPUT NOTAS
 # ========================
 
 st.subheader("📊 Suas notas")
 
 col1, col2, col3, col4, col5 = st.columns(5)
 
-redacao = col1.number_input("Redação", 0.0, 1000.0, 700.0)
-humanas = col2.number_input("Humanas", 0.0, 1000.0, 600.0)
-natureza = col3.number_input("Natureza", 0.0, 1000.0, 600.0)
-linguagens = col4.number_input("Linguagens", 0.0, 1000.0, 600.0)
-matematica = col5.number_input("Matemática", 0.0, 1000.0, 600.0)
-
-st.markdown("---")
-
-# ========================
-# BOTÃO CENTRAL
-# ========================
-
-col_btn = st.columns([1,2,1])
-with col_btn[1]:
-    calcular = st.button("🚀 Calcular minhas chances", use_container_width=True)
+redacao = col1.number_input("Redação", min_value=0.0, max_value=1000.0, value=000.0, step=None)
+humanas = col2.number_input("Humanas", min_value=0.0, max_value=1000.0, value=000.0, step=None)
+natureza = col3.number_input("Natureza", min_value=0.0, max_value=1000.0, value=000.0, step=None)
+linguagens = col4.number_input("Linguagens", min_value=0.0, max_value=1000.0, value=000.0, step=None)
+matematica = col5.number_input("Matemática", min_value=0.0, max_value=1000.0, value=000.0, step=None)
 
 # ========================
 # CALCULO
 # ========================
 
-if calcular:
+if st.button("🚀 Calcular minhas chances"):
 
     df_result = df_filtrado.copy()
 
@@ -138,10 +104,10 @@ if calcular:
     df_result = df_result.sort_values(by="Diferença", ascending=False)
 
     # ========================
-    # TOP 3 (MELHORES OPÇÕES)
+    # TOP 3 INTELIGENTE
     # ========================
 
-    st.subheader("🏆 Melhores opções")
+    st.subheader("🏆 Melhores Opções")
 
     aprovados = df_result[df_result["Diferença"] >= 0]
 
@@ -159,9 +125,7 @@ if calcular:
                 f"{row['Minha Nota']}",
                 f"{row['Diferença']} pts"
             )
-            st.caption(f"{row['universidade']} • {row['campus']}")
-
-    st.markdown("---")
+            st.caption(f"{row['universidade']} - {row['campus']}")
 
     # ========================
     # TABELA
@@ -177,7 +141,9 @@ if calcular:
         "nota corte": "Nota de Corte"
     })
 
-    st.subheader("📊 Resultados detalhados")
+    # ========================
+    # ABAS DINÂMICAS
+    # ========================
 
     df_alta = df_view[df_view["Chance"] == "Alta chance"]
     df_media = df_view[df_view["Chance"] == "Média"]
@@ -197,6 +163,8 @@ if calcular:
     if not df_baixa.empty:
         abas.append(df_baixa)
         nomes.append("🔴 Baixa")
+
+    st.subheader("📊 Resultados")
 
     if abas:
         tabs = st.tabs(nomes)
