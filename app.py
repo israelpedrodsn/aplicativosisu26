@@ -1,194 +1,140 @@
 import streamlit as st
 import pandas as pd
 
-# ========================
 # CONFIG
-# ========================
-
 st.set_page_config(page_title="Simulador SISU", layout="wide")
 
+# CSS LIMPO (sem quebrar nada)
 st.markdown("""
 <style>
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
 
-/* ===== REMOVER MENU SUPERIOR (3 pontinhos) ===== */
-#MainMenu {
-    visibility: hidden;
-}
-
-/* ===== REMOVER FOOTER ===== */
-footer {
-    visibility: hidden;
-}
-
-/* ===== ESCONDER BOTÃO "Deploy" e elementos extras ===== */
-[data-testid="stToolbar"] {
-    display: none;
-}
-
-/* ===== ESCONDER BOTÃO DE "View fullscreen / settings" ===== */
-[data-testid="stDecoration"] {
-    display: none;
-}
-
-/* ===== REMOVER SETINHAS DOS INPUTS ===== */
+/* tirar setinhas */
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none; 
     margin: 0; 
 }
-
 input[type=number] {
     -moz-appearance: textfield;
 }
 
+/* cards visuais */
+.card {
+    padding: 15px;
+    border-radius: 12px;
+    background-color: #111;
+    border: 1px solid #333;
+    margin-bottom: 10px;
+}
 </style>
 """, unsafe_allow_html=True)
 
-# ========================
-# LOAD DATA
-# ========================
-
+# CARREGAR DADOS
 df = pd.read_csv("dados.csv", sep=";", decimal=",")
 
+# TÍTULO
 st.title("🎓 Simulador SISU")
-st.write("Veja onde você tem mais chances de passar")
+st.write("Descubra onde você tem chance de passar")
 
-# ========================
-# FILTROS
-# ========================
+# ===== LAYOUT =====
+col1, col2 = st.columns([1,1])
 
-st.sidebar.header("🔎 Filtros")
+# ===== NOTAS =====
+with col1:
+    st.subheader("📊 Suas notas")
 
-uni = st.sidebar.selectbox(
-    "Universidade",
-    ["Todas"] + sorted(df["universidade"].unique())
-)
+    redacao = st.number_input("Redação", 0.0, 1000.0, 700.0)
+    humanas = st.number_input("Ciências Humanas", 0.0, 1000.0, 600.0)
+    natureza = st.number_input("Ciências da Natureza", 0.0, 1000.0, 600.0)
+    linguagens = st.number_input("Linguagens e Códigos", 0.0, 1000.0, 600.0)
+    matematica = st.number_input("Matemática", 0.0, 1000.0, 700.0)
 
-df_filtrado = df if uni == "Todas" else df[df["universidade"] == uni]
+# ===== FILTROS =====
+with col2:
+    st.subheader("🎯 Filtros")
 
-curso = st.sidebar.selectbox(
-    "Curso",
-    ["Todos"] + sorted(df_filtrado["curso"].unique())
-)
+    universidades = st.multiselect(
+        "Universidade",
+        options=sorted(df["universidade"].unique())
+    )
 
-if curso != "Todos":
-    df_filtrado = df_filtrado[df_filtrado["curso"] == curso]
+    cursos = st.multiselect(
+        "Curso",
+        options=sorted(df["curso"].unique())
+    )
 
-# ========================
-# INPUT NOTAS
-# ========================
+    categorias = st.multiselect(
+        "Tipo de chance",
+        ["Alta chance", "Média chance", "Baixa chance"],
+        default=["Alta chance", "Média chance"]
+    )
 
-st.subheader("📊 Suas notas")
+# ===== CÁLCULO =====
+df["nota_final"] = (
+    redacao * df["redacao"] +
+    humanas * df["ciencias humanas"] +
+    natureza * df["ciencias da natureza"] +
+    linguagens * df["linguagens e codigos"] +
+    matematica * df["matematica"]
+) / df["soma pesos"]
 
-col1, col2, col3, col4, col5 = st.columns(5)
+df["dif"] = df["nota_final"] - df["nota corte"]
 
-redacao = col1.number_input("Redação", min_value=0.0, max_value=1000.0, value=000.0, step=None)
-humanas = col2.number_input("Humanas", min_value=0.0, max_value=1000.0, value=000.0, step=None)
-natureza = col3.number_input("Natureza", min_value=0.0, max_value=1000.0, value=000.0, step=None)
-linguagens = col4.number_input("Linguagens", min_value=0.0, max_value=1000.0, value=000.0, step=None)
-matematica = col5.number_input("Matemática", min_value=0.0, max_value=1000.0, value=000.0, step=None)
-
-# ========================
-# CALCULO
-# ========================
-
-if st.button("🚀 Calcular minhas chances"):
-
-    df_result = df_filtrado.copy()
-
-    df_result["Minha Nota"] = (
-        redacao * df_result["redacao"] +
-        humanas * df_result["ciencias humanas"] +
-        natureza * df_result["ciencias da natureza"] +
-        linguagens * df_result["linguagens e codigos"] +
-        matematica * df_result["matematica"]
-    ) / df_result["soma pesos"]
-
-    df_result["Diferença"] = df_result["Minha Nota"] - df_result["nota corte"]
-
-    def classificar(d):
-        if d >= 0:
-            return "Alta chance"
-        elif d >= -10:
-            return "Média"
-        else:
-            return "Baixa"
-
-    df_result["Chance"] = df_result["Diferença"].apply(classificar)
-
-    df_result["Minha Nota"] = df_result["Minha Nota"].round(1)
-    df_result["Diferença"] = df_result["Diferença"].round(1)
-
-    df_result = df_result.sort_values(by="Diferença", ascending=False)
-
-    # ========================
-    # TOP 3 INTELIGENTE
-    # ========================
-
-    st.subheader("🏆 Melhores Opções")
-
-    aprovados = df_result[df_result["Diferença"] >= 0]
-
-    if not aprovados.empty:
-        top3 = aprovados.sort_values(by="nota corte", ascending=False).head(3)
+# CLASSIFICAÇÃO
+def classificar(dif):
+    if dif >= 0:
+        return "Alta chance"
+    elif dif >= -10:
+        return "Média chance"
     else:
-        top3 = df_result.head(3)
+        return "Baixa chance"
 
-    cols = st.columns(3)
+df["chance"] = df["dif"].apply(classificar)
 
-    for i, (_, row) in enumerate(top3.iterrows()):
-        with cols[i]:
-            st.metric(
-                row["curso"],
-                f"{row['Minha Nota']}",
-                f"{row['Diferença']} pts"
-            )
-            st.caption(f"{row['universidade']} - {row['campus']}")
+# ===== FILTROS APLICADOS =====
+df_filtrado = df.copy()
 
-    # ========================
-    # TABELA
-    # ========================
+if universidades:
+    df_filtrado = df_filtrado[df_filtrado["universidade"].isin(universidades)]
 
-    df_view = df_result[[
-        "universidade", "curso", "campus",
-        "Minha Nota", "nota corte", "Diferença", "Chance"
-    ]].rename(columns={
-        "universidade": "Universidade",
-        "curso": "Curso",
-        "campus": "Campus",
-        "nota corte": "Nota de Corte"
-    })
+if cursos:
+    df_filtrado = df_filtrado[df_filtrado["curso"].isin(cursos)]
 
-    # ========================
-    # ABAS DINÂMICAS
-    # ========================
+# ===== RESULTADOS =====
+st.subheader("📈 Resultados")
 
-    df_alta = df_view[df_view["Chance"] == "Alta chance"]
-    df_media = df_view[df_view["Chance"] == "Média"]
-    df_baixa = df_view[df_view["Chance"] == "Baixa"]
+if categorias:
+    df_filtrado = df_filtrado[df_filtrado["chance"].isin(categorias)]
 
-    abas = []
-    nomes = []
+# remover índice
+df_filtrado = df_filtrado.reset_index(drop=True)
 
-    if not df_alta.empty:
-        abas.append(df_alta)
-        nomes.append("🟢 Alta chance")
+# renomear colunas
+df_filtrado = df_filtrado.rename(columns={
+    "universidade": "Universidade",
+    "curso": "Curso",
+    "campus": "Campus",
+    "turno/grau": "Turno",
+    "nota_final": "Sua Nota",
+    "nota corte": "Nota de Corte",
+    "chance": "Chance"
+})
 
-    if not df_media.empty:
-        abas.append(df_media)
-        nomes.append("🟡 Média")
+st.dataframe(df_filtrado, use_container_width=True)
 
-    if not df_baixa.empty:
-        abas.append(df_baixa)
-        nomes.append("🔴 Baixa")
+# ===== TOP 3 (MAIS DIFÍCEIS QUE PASSA) =====
+st.subheader("🏆 Cursos mais difíceis que você passaria")
 
-    st.subheader("📊 Resultados")
+top3 = df[df["dif"] >= 0].sort_values(by="nota corte", ascending=False).head(3)
 
-    if abas:
-        tabs = st.tabs(nomes)
+top3 = top3.rename(columns={
+    "universidade": "Universidade",
+    "curso": "Curso",
+    "campus": "Campus",
+    "nota corte": "Nota de Corte",
+    "nota_final": "Sua Nota"
+})
 
-        for tab, tabela in zip(tabs, abas):
-            with tab:
-                st.dataframe(tabela, hide_index=True)
-    else:
-        st.warning("Nenhum resultado encontrado com esses filtros.")
+st.dataframe(top3[["Universidade", "Curso", "Campus", "Nota de Corte", "Sua Nota"]], use_container_width=True)
