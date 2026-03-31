@@ -19,7 +19,7 @@ st.markdown("""
 # 🔐 SISTEMA DE SENHA
 # ========================
 
-SENHA_CORRETA = "sisu2026"
+SENHA_CORRETA = st.secrets["senha"]
 
 if "autenticado" not in st.session_state:
     st.session_state["autenticado"] = False
