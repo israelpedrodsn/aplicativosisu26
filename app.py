@@ -290,20 +290,25 @@ with aba2:
     with col1:
         uni_peso = st.multiselect(
             "Universidade",
-            ["Todas"] + sorted(df["universidade"].unique()),
+            sorted(df["universidade"].unique()),
             key="peso_uni"
         )
 
-    df_peso = df if uni_peso == "Todas" else df[df["universidade"].isin(uni_peso)]
+   
+    if len(uni_peso) == 0:
+        df_peso = df
+    else:
+        df_peso = df[df["universidade"].isin(uni_peso)]
 
     with col2:
         curso_peso = st.multiselect(
             "Curso",
-            ["Todos"] + sorted(df_peso["curso"].unique()),
+            sorted(df_peso["curso"].unique()),
             key="peso_curso"
         )
 
-    if curso_peso != "Todos":
+  
+    if len(curso_peso) != 0:
         df_peso = df_peso[df_peso["curso"].isin(curso_peso)]
 
     tabela_pesos = df_peso[[
