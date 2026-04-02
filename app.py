@@ -1,8 +1,5 @@
 import streamlit as st
 import pandas as pd
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
-from reportlab.lib import colors
-from io import BytesIO
 
 # ========================
 # CONFIG
@@ -48,40 +45,15 @@ if not st.session_state["autenticado"]:
 df = pd.read_csv("dados.csv", sep=";", decimal=",")
 
 # ========================
-# FUNÇÃO PDF
-# ========================
-
-def gerar_pdf(df):
-    buffer = BytesIO()
-    doc = SimpleDocTemplate(buffer)
-
-    data = [df.columns.tolist()] + df.values.tolist()
-
-    tabela = Table(data)
-
-    estilo = TableStyle([
-        ("BACKGROUND", (0, 0), (-1, 0), colors.grey),
-        ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-        ("ALIGN", (0, 0), (-1, -1), "CENTER"),
-        ("GRID", (0, 0), (-1, -1), 0.5, colors.black),
-    ])
-
-    tabela.setStyle(estilo)
-
-    elementos = [tabela]
-    doc.build(elementos)
-
-    buffer.seek(0)
-    return buffer
-
-# ========================
-# ABAS
+# ABAS PRINCIPAIS
 # ========================
 
 aba1, aba2 = st.tabs(["🎓 Simulador", "⚖️ Pesos dos cursos"])
 
 # ========================
-# 🎓 SIMULADOR
+# ========================
+# 🎓 ABA 1 - SIMULADOR
+# ========================
 # ========================
 
 with aba1:
@@ -216,21 +188,23 @@ with aba1:
         else:
             st.warning("Nenhum resultado encontrado com esses filtros.")
 
-        # DOWNLOAD PDF
+        # DOWNLOAD
         st.markdown("---")
         st.subheader("📥 Exportar resultados")
 
-        pdf = gerar_pdf(df_view)
+        csv = df_view.to_csv(index=False).encode("utf-8")
 
         st.download_button(
-            label="📄 Baixar tabela em PDF",
-            data=pdf,
-            file_name="simulador_sisu.pdf",
-            mime="application/pdf"
+            label="📥 Baixar tabela completa (CSV)",
+            data=csv,
+            file_name="simulador_sisu_resultados.csv",
+            mime="text/csv"
         )
 
 # ========================
-# ⚖️ PESOS
+# ========================
+# ⚖️ ABA 2 - PESOS
+# ========================
 # ========================
 
 with aba2:
