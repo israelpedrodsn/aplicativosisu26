@@ -138,7 +138,7 @@ with aba1:
 
     col_filtros, col_notas = st.columns([1, 2])
 
-    with col_filtros:
+   with col_filtros:
     st.subheader("🔎 Filtros")
 
     uni = st.multiselect(
@@ -146,7 +146,6 @@ with aba1:
         sorted(df["universidade"].unique()),
         key="sim_uni"
     )
-
 
     if uni:
         df_filtrado = df[df["universidade"].isin(uni)]
@@ -159,7 +158,6 @@ with aba1:
         key="sim_curso"
     )
 
-   
     if curso:
         df_filtrado = df_filtrado[df_filtrado["curso"].isin(curso)]
 
