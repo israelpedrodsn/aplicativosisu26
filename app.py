@@ -131,37 +131,35 @@ aba1, aba2 = st.tabs(["🎓 Simulador", "⚖️ Pesos dos cursos"])
 # 🎓 SIMULADOR
 # ========================
 
+
 with aba1:
+    st.title("🎓 Simulador SISU")
+    st.write("Veja onde você tem mais chances de passar")
 
-st.title("🎓 Simulador SISU")
-st.write("Veja onde você tem mais chances de passar")
+    col_filtros, col_notas = st.columns([1, 2])
 
-col_filtros, col_notas = st.columns([1, 2])
+    with col_filtros:
+        st.subheader("🔎 Filtros")
 
-with col_filtros:
-    st.subheader("🔎 Filtros")
+        uni = st.multiselect(
+            "Universidade",
+            sorted(df["universidade"].unique()),
+            key="sim_uni"
+        )
 
-    uni = st.multiselect(
-        "Universidade",
-        sorted(df["universidade"].unique()),
-        key="sim_uni"
-    )
+        if len(uni) > 0:
+            df_filtrado = df[df["universidade"].isin(uni)]
+        else:
+            df_filtrado = df
 
-  
-    if len(uni) > 0:
-        df_filtrado = df[df["universidade"].isin(uni)]
-    else:
-        df_filtrado = df
+        curso = st.multiselect(
+            "Curso",
+            sorted(df_filtrado["curso"].unique()),
+            key="sim_curso"
+        )
 
-    curso = st.multiselect(
-        "Curso",
-        sorted(df_filtrado["curso"].unique()),
-        key="sim_curso"
-    )
-
-   
-    if len(curso) > 0:
-        df_filtrado = df_filtrado[df_filtrado["curso"].isin(curso)]
+        if len(curso) > 0:
+            df_filtrado = df_filtrado[df_filtrado["curso"].isin(curso)]
     with col_notas:
         st.subheader("📊 Suas notas")
 
