@@ -115,7 +115,7 @@ UFG;ENGENHARIA DE COMPUTAÇÃO;Câmpus Colemar Natal e Silva (Goiânia);Integral
 UFG;FÍSICA MÉDICA;Câmpus Samambaia;Integral (Bacharelado);1,5;1;2,5;2;3;10;754,97
 UFG;ARQUITETURA E URBANISMO;Câmpus Samambaia;Integral (Bacharelado);1,5;1;2,5;2;3;10;756,34
 UFG;ENGENHARIA MECÂNICA;Câmpus Samambaia;Integral (Bacharelado);1,5;1;2,5;2;3;10;758,3
-UFG;R5ELAÇÕES INTERNACIONAIS;Câmpus Samambaia;Matutino (Bacharelado);2,5;2;1;2,5;2;10;760
+UFG;RELAÇÕES INTERNACIONAIS;Câmpus Samambaia;Matutino (Bacharelado);2,5;2;1;2,5;2;10;760
 UFG;ENGENHARIA QUÍMICA;Câmpus Samambaia;Integral (Bacharelado);1,5;1;2,5;2;3;10;761,47
 UFG;PSICOLOGIA;Câmpus Colemar Natal e Silva (Goiânia);Integral (Bacharelado);2,5;2;1;2,5;2;10;773,96
 UFG;DIREITO;Câmpus Colemar Natal e Silva (Goiânia);Matutino (Bacharelado);2,5;2;1;2,5;2;10;777,7
@@ -275,3 +275,97 @@ UFT;RELAÇÕES INTERNACIONAIS;Campus Universitário de Porto Nacional;Vespertino
 UFT;SERVIÇO SOCIAL;Campus Universitário de Miracema;Matutino (Bacharelado);1;4;1;4;2;12;581,78
 UFT;TEATRO;Campus Universitário de Palmas;Noturno (Licenciatura);1;4;1;4;2;12;610,03
 UFT;TURISMO PATRIMONIAL E SOCIOAMBIENTAL;Campus Universitário de Arraias;Noturno (Tecnológico);3;4;2;3;1;13;564,08
+UFU;ABI - ARTES VISUAIS;Santa Mônica;Integral / ABI;3;3;1;2;1;10;710,53
+UFU;ABI - ARTES VISUAIS;Santa Mônica;Noturno / ABI;3;3;1;2;1;10;702,92
+UFU;ABI - CIÊNCIAS SOCIAIS;Santa Mônica;Matutino / ABI;3;3;1;2;1;10;701,87
+UFU;ABI - FILOSOFIA;Santa Mônica;Matutino / ABI;3;3;1;2;1;10;664,41
+UFU;ABI - FILOSOFIA;Santa Mônica;Noturno / ABI;3;3;1;2;1;10;656,22
+UFU;ABI - GEOGRAFIA;Santa Mônica;Matutino / ABI;3;3;1;2;1;10;654,11
+UFU;ABI - GEOGRAFIA;Santa Mônica;Noturno / ABI;3;3;1;2;1;10;643,18
+UFU;ABI - HISTÓRIA;Santa Mônica;Matutino / ABI;3;3;1;2;1;10;695,93
+UFU;ABI - HISTÓRIA;Santa Mônica;Noturno / ABI;3;3;1;2;1;10;677,48
+UFU;ABI - MATEMÁTICA;Santa Mônica;Integral / ABI;3;1;2;1;3;10;690,07
+UFU;ABI - TEATRO;Santa Mônica;Integral / ABI;3;2;1;3;1;10;690,05
+UFU;ADMINISTRAÇÃO;Santa Mônica;Integral / Bacharelado;3;3;1;2;1;10;723,6
+UFU;ADMINISTRAÇÃO;Santa Mônica;Noturno / Bacharelado;3;3;1;2;1;10;716,8
+UFU;ARQUITETURA E URBANISMO;Santa Mônica;Integral / Bacharelado;3;3;1;1;2;10;767,05
+UFU;CIBERSEGURANÇA;Santa Mônica;Noturno / Bacharelado;3;3;2;1;1;10;740,15
+UFU;CIÊNCIA DA COMPUTAÇÃO;Santa Mônica;Integral / Bacharelado;3;1;2;1;3;10;799,54
+UFU;CIÊNCIA DE DADOS E ESTATÍSTICA;Santa Mônica;Noturno / Bacharelado;3;1;1;2;3;10;758,43
+UFU;CIÊNCIAS CONTÁBEIS;Santa Mônica;Integral / Bacharelado;3;3;1;2;1;10;704,51
+UFU;CIÊNCIAS CONTÁBEIS;Santa Mônica;Noturno / Bacharelado;3;3;1;2;1;10;705,77
+UFU;CIÊNCIAS ECONÔMICAS;Santa Mônica;Integral / Bacharelado;3;3;1;2;1;10;749,44
+UFU;DANÇA;Santa Mônica;Integral / Bacharelado;3;2;1;3;1;10;702,21
+UFU;DESIGN;Santa Mônica;Integral / Bacharelado;3;3;1;2;1;10;728,53
+UFU;DIREITO;Santa Mônica;Matutino / Bacharelado;3;3;1;2;1;10;778,09
+UFU;DIREITO;Santa Mônica;Noturno / Bacharelado;3;3;1;2;1;10;771,42
+UFU;ENGENHARIA BIOMÉDICA;Santa Mônica;Integral / Bacharelado;3;1;2;1;3;10;789,75
+UFU;ENGENHARIA CIVIL;Santa Mônica;Integral / Bacharelado;3;1;2;1;3;10;770,14
+UFU;ENGENHARIA DE COMPUTAÇÃO COM IA APLICADA;Santa Mônica;Vespertino / Bacharelado;3;3;2;1;1;10;769,02
+UFU;ENGENHARIA DE CONTROLE E AUTOMAÇÃO;Santa Mônica;Integral / Bacharelado;3;1;1;2;3;10;788,83
+UFU;ENGENHARIA ELETRÔNICA E DE TELECOMUNICAÇÕES;Santa Mônica;Integral / Bacharelado;3;1;2;1;3;10;742,32
+UFU;ENGENHARIA ELÉTRICA;Santa Mônica;Integral / Bacharelado;3;1;2;1;3;10;781,98
+UFU;ENGENHARIA QUÍMICA;Santa Mônica;Integral / Bacharelado;3;1;2;1;3;10;778,07
+UFU;FÍSICA;Santa Mônica;Integral / Bacharelado;3;1;3;1;2;10;699,13
+UFU;FÍSICA;Santa Mônica;Noturno / Licenciatura;3;2;2;1;2;10;613,42
+UFU;FÍSICA MÉDICA;Santa Mônica;Integral / Bacharelado;3;1;3;1;2;10;761,71
+UFU;GESTÃO DA INFORMAÇÃO;Santa Mônica;Integral / Bacharelado;3;2;1;1;3;10;715,69
+UFU;INTELIGÊNCIA ARTIFICIAL;Santa Mônica;Matutino / Bacharelado;3;1;2;1;3;10;804,64
+UFU;JORNALISMO;Santa Mônica;Integral / Bacharelado;3;2;1;3;1;10;739,62
+UFU;LETRAS - ESPANHOL E LIT. LÍNGUA ESPANHOLA;Santa Mônica;Matutino / Licenciatura;3;2;1;3;1;10;636,04
+UFU;LETRAS - FRANCÊS E LIT. LÍNGUA FRANCESA;Santa Mônica;Noturno / Licenciatura;3;2;1;3;1;10;711,02
+UFU;LETRAS - INGLÊS E LIT. LÍNGUA INGLESA;Santa Mônica;Matutino / Licenciatura;3;2;1;3;1;10;685,6
+UFU;LETRAS - INGLÊS E LIT. LÍNGUA INGLESA;Santa Mônica;Noturno / Licenciatura;3;2;1;3;1;10;672,51
+UFU;LETRAS - LÍNGUA PORTUGUESA COM DOMÍNIO DE LIBRAS;Santa Mônica;Matutino / Licenciatura;3;2;1;3;1;10;630,14
+UFU;LETRAS - PORTUGUÊS E LIT. LÍNGUA PORTUGUESA;Santa Mônica;Matutino / Licenciatura;3;2;1;3;1;10;694
+UFU;LETRAS - PORTUGUÊS E LIT. LÍNGUA PORTUGUESA;Santa Mônica;Noturno / Licenciatura;3;2;1;3;1;10;687,03
+UFU;PEDAGOGIA;Santa Mônica;Matutino / Licenciatura;3;3;1;2;1;10;666,08
+UFU;PEDAGOGIA;Santa Mônica;Noturno / Licenciatura;3;3;1;2;1;10;673,32
+UFU;QUÍMICA;Santa Mônica;Noturno / Licenciatura;3;1;2;1;3;10;678,4
+UFU;QUÍMICA INDUSTRIAL;Santa Mônica;Integral / Bacharelado;3;1;2;1;3;10;710,39
+UFU;RELAÇÕES INTERNACIONAIS;Santa Mônica;Integral / Bacharelado;3;3;1;2;1;10;755,48
+UFU;SAÚDE COLETIVA;Santa Mônica;Vespertino / Bacharelado;3;1;3;1;2;10;671,34
+UFU;SISTEMAS DE INFORMAÇÃO;Santa Mônica;Noturno / Bacharelado;3;1;2;1;3;10;762,77
+UFU;TRADUÇÃO;Santa Mônica;Noturno / Bacharelado;3;2;1;3;1;10;681,66
+UFU;ABI - EDUCAÇÃO FÍSICA;Educação Física;Integral / ABI;3;2;3;1;1;10;699,24
+UFU;FISIOTERAPIA;Educação Física;Integral / Bacharelado;3;1;3;1;2;10;756
+UFU;AGRONOMIA;Glória;Integral / Bacharelado;3;1;3;1;2;10;730,49
+UFU;ENGENHARIA AERONÁUTICA;Glória;Integral / Bacharelado;3;1;2;1;3;10;834,91
+UFU;ENGENHARIA AMBIENTAL E SANITÁRIA;Glória;Integral / Bacharelado;3;1;2;1;3;10;692,96
+UFU;ENGENHARIA MECATRÔNICA;Glória;Integral / Bacharelado;3;1;2;1;3;10;802,31
+UFU;MEDICINA VETERINÁRIA;Glória;Integral / Bacharelado;3;1;3;1;2;10;763,66
+UFU;ZOOTECNIA;Glória;Integral / Bacharelado;3;1;3;1;2;10;675,9
+UFU;AGRONOMIA;Monte Carmelo;Integral / Bacharelado;3;1;3;1;2;10;706,94
+UFU;ENGENHARIA DE AGRIMENSURA E CARTOGRÁFICA;Monte Carmelo;Integral / Bacharelado;3;1;2;1;3;10;457,94
+UFU;ENGENHARIA FLORESTAL;Monte Carmelo;Integral / Bacharelado;3;1;2;1;3;10;589,71
+UFU;GEOLOGIA;Monte Carmelo;Integral / Bacharelado;3;1;3;1;2;10;683,98
+UFU;SISTEMAS DE INFORMAÇÃO;Monte Carmelo;Integral / Bacharelado;3;1;1;3;2;10;714,34
+UFU;BIOTECNOLOGIA;Patos de Minas;Integral / Bacharelado;3;1;3;1;2;10;726,86
+UFU;ENGENHARIA DE ALIMENTOS;Patos de Minas;Integral / Bacharelado;3;1;3;1;2;10;645,34
+UFU;ENGENHARIA ELETRÔNICA E DE TELECOMUNICAÇÕES;Patos de Minas;Integral / Bacharelado;3;1;2;1;3;10;671,71
+UFU;ABI - GEOGRAFIA;Pontal;Matutino / ABI;3;3;1;2;1;10;405,27
+UFU;ABI - GEOGRAFIA;Pontal;Noturno / ABI;3;3;1;2;1;10;598,32
+UFU;ABI - HISTÓRIA;Pontal;Noturno / ABI;3;3;1;2;1;10;658,82
+UFU;ADMINISTRAÇÃO;Pontal;Noturno / Bacharelado;3;3;1;2;1;10;704,73
+UFU;CIÊNCIAS BIOLÓGICAS;Pontal;Integral / Bacharelado;3;1;3;1;2;10;689,42
+UFU;CIÊNCIAS BIOLÓGICAS;Pontal;Noturno / Licenciatura;3;1;3;1;2;10;651,64
+UFU;CIÊNCIAS CONTÁBEIS;Pontal;Noturno / Bacharelado;3;3;1;2;1;10;688,98
+UFU;ENGENHARIA DE PRODUÇÃO;Pontal;Integral / Bacharelado;3;1;2;1;3;10;746,15
+UFU;MATEMÁTICA;Pontal;Integral / Bacharelado;3;1;2;1;3;10;456,22
+UFU;MATEMÁTICA;Pontal;Noturno / Licenciatura;3;1;2;1;3;10;414,69
+UFU;PEDAGOGIA;Pontal;Integral / Licenciatura;3;3;1;2;1;10;612,12
+UFU;PEDAGOGIA;Pontal;Noturno / Licenciatura;3;3;1;2;1;10;625,7
+UFU;QUÍMICA;Pontal;Integral / Bacharelado;3;1;3;1;2;10;652,91
+UFU;QUÍMICA;Pontal;Noturno / Licenciatura;3;2;3;1;1;10;415,49
+UFU;SERVIÇO SOCIAL;Pontal;Matutino / Bacharelado;3;3;1;2;1;10;605,3
+UFU;ABI - ENFERMAGEM;Umuarama;Integral / ABI;3;2;1;3;1;10;740,9
+UFU;BIOMEDICINA;Umuarama;Integral / Bacharelado;3;1;3;1;2;10;791,51
+UFU;BIOTECNOLOGIA;Umuarama;Integral / Bacharelado;3;1;3;1;2;10;753,58
+UFU;CIÊNCIAS BIOLÓGICAS;Umuarama;Integral / Bacharelado;3;1;3;1;2;10;731,03
+UFU;CIÊNCIAS BIOLÓGICAS;Umuarama;Integral / Licenciatura;3;1;3;1;2;10;697,83
+UFU;CIÊNCIAS BIOLÓGICAS;Umuarama;Noturno / Licenciatura;3;1;3;1;2;10;691,67
+UFU;MEDICINA;Umuarama;Integral / Bacharelado;3;1;3;1;2;10;842,57
+UFU;NUTRIÇÃO;Umuarama;Integral / Bacharelado;3;1;3;1;2;10;755,5
+UFU;ODONTOLOGIA;Umuarama;Integral / Bacharelado;3;1;3;1;2;10;789,11
+UFU;PSICOLOGIA;Umuarama;Integral / Bacharelado;3;3;1;2;1;10;772,79
+UFU;ENGENHARIA MECANICA;Glória;Integral/Bacharelado;3;1;2;1;3;10;795,43
