@@ -141,22 +141,22 @@ with aba1:
     with col_filtros:
         st.subheader("🔎 Filtros")
 
-        uni = st.selectbox(
+        uni = st.multiselect(
             "Universidade",
             ["Todas"] + sorted(df["universidade"].unique()),
             key="sim_uni"
         )
 
-        df_filtrado = df if uni == "Todas" else df[df["universidade"] == uni]
+        df_filtrado = df if uni == "Todas" else df[df["universidade"].isin(uni)]
 
-        curso = st.selectbox(
+        curso = st.multiselect(
             "Curso",
             ["Todos"] + sorted(df_filtrado["curso"].unique()),
             key="sim_curso"
         )
 
         if curso != "Todos":
-            df_filtrado = df_filtrado[df_filtrado["curso"] == curso]
+            df_filtrado = df_filtrado[df_filtrado["curso"].isin(curso)]
 
     with col_notas:
         st.subheader("📊 Suas notas")
@@ -288,23 +288,23 @@ with aba2:
     col1, col2 = st.columns(2)
 
     with col1:
-        uni_peso = st.selectbox(
+        uni_peso = st.multiselect(
             "Universidade",
             ["Todas"] + sorted(df["universidade"].unique()),
             key="peso_uni"
         )
 
-    df_peso = df if uni_peso == "Todas" else df[df["universidade"] == uni_peso]
+    df_peso = df if uni_peso == "Todas" else df[df["universidade"].isin(uni_peso)]
 
     with col2:
-        curso_peso = st.selectbox(
+        curso_peso = st.multiselect(
             "Curso",
             ["Todos"] + sorted(df_peso["curso"].unique()),
             key="peso_curso"
         )
 
     if curso_peso != "Todos":
-        df_peso = df_peso[df_peso["curso"] == curso_peso]
+        df_peso = df_peso[df_peso["curso"].isin(curso_peso)]
 
     tabela_pesos = df_peso[[
         "universidade", "curso", "campus",
