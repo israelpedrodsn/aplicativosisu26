@@ -1,6 +1,11 @@
 import streamlit as st
 import pandas as pd
 
+# PDF
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.lib import colors
+from io import BytesIO
+
 # ========================
 # CONFIG
 # ========================
@@ -45,15 +50,39 @@ if not st.session_state["autenticado"]:
 df = pd.read_csv("dados.csv", sep=";", decimal=",")
 
 # ========================
-# ABAS PRINCIPAIS
+# FUNÇÃO PDF
+# ========================
+
+def gerar_pdf(df):
+    buffer = BytesIO()
+    doc = SimpleDocTemplate(buffer)
+
+    data = [df.columns.tolist()] + df.values.tolist()
+
+    tabela = Table(data)
+
+    estilo = TableStyle([
+        ("BACKGROUND", (0, 0), (-1, 0), colors.grey),
+        ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+        ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+        ("GRID", (0, 0), (-1, -1), 0.5, colors.black),
+    ])
+
+    tabela.setStyle(estilo)
+
+    doc.build([tabela])
+
+    buffer.seek(0)
+    return buffer
+
+# ========================
+# ABAS
 # ========================
 
 aba1, aba2 = st.tabs(["🎓 Simulador", "⚖️ Pesos dos cursos"])
 
 # ========================
-# ========================
-# 🎓 ABA 1 - SIMULADOR
-# ========================
+# 🎓 SIMULADOR
 # ========================
 
 with aba1:
@@ -63,7 +92,6 @@ with aba1:
 
     col_filtros, col_notas = st.columns([1, 2])
 
-    # FILTROS
     with col_filtros:
         st.subheader("🔎 Filtros")
 
@@ -84,7 +112,6 @@ with aba1:
         if curso != "Todos":
             df_filtrado = df_filtrado[df_filtrado["curso"] == curso]
 
-    # NOTAS
     with col_notas:
         st.subheader("📊 Suas notas")
 
@@ -96,7 +123,6 @@ with aba1:
         linguagens = col4.number_input("Linguagens", 0.0, 1000.0, 600.0, step=None)
         matematica = col5.number_input("Matemática", 0.0, 1000.0, 600.0, step=None)
 
-    # BOTÃO
     if st.button("🚀 Calcular minhas chances"):
 
         df_result = df_filtrado.copy()
@@ -188,23 +214,24 @@ with aba1:
         else:
             st.warning("Nenhum resultado encontrado com esses filtros.")
 
-        # DOWNLOAD
+        # ========================
+        # PDF DOWNLOAD
+        # ========================
+
         st.markdown("---")
         st.subheader("📥 Exportar resultados")
 
-        csv = df_view.to_csv(index=False).encode("utf-8")
+        pdf = gerar_pdf(df_view)
 
         st.download_button(
-            label="📥 Baixar tabela completa (CSV)",
-            data=csv,
-            file_name="simulador_sisu_resultados.csv",
-            mime="text/csv"
+            label="📄 Baixar tabela em PDF",
+            data=pdf,
+            file_name="simulador_sisu.pdf",
+            mime="application/pdf"
         )
 
 # ========================
-# ========================
-# ⚖️ ABA 2 - PESOS
-# ========================
+# ⚖️ PESOS
 # ========================
 
 with aba2:
