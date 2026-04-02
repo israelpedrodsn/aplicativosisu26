@@ -143,7 +143,7 @@ with aba1:
 
         uni = st.multiselect(
             "Universidade",
-            ["Todas"] + sorted(df["universidade"].unique()),
+            sorted(df["universidade"].unique()),
             key="sim_uni"
         )
 
@@ -151,7 +151,7 @@ with aba1:
 
         curso = st.multiselect(
             "Curso",
-            ["Todos"] + sorted(df_filtrado["curso"].unique()),
+            sorted(df_filtrado["curso"].unique()),
             key="sim_curso"
         )
 
