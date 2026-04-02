@@ -53,87 +53,28 @@ df = pd.read_csv("dados.csv", sep=";", decimal=",")
 # FUNÇÃO PDF
 # ========================
 
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Image, Spacer
-from reportlab.lib import colors
-from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import getSampleStyleSheet
-from io import BytesIO
-
 def gerar_pdf(df):
-
     buffer = BytesIO()
+    doc = SimpleDocTemplate(buffer)
 
-    doc = SimpleDocTemplate(
-        buffer,
-        pagesize=A4,
-        rightMargin=20,
-        leftMargin=20,
-        topMargin=40,
-        bottomMargin=20
-    )
+    data = [df.columns.tolist()] + df.values.tolist()
 
-    styles = getSampleStyleSheet()
-    style = styles["Normal"]
-    style.fontSize = 8
+    tabela = Table(data)
 
-    elementos = []
-
-    # ========================
-    # LOGO + TÍTULO
-    # ========================
-
-    try:
-        logo = Image("logo.png", width=100, height=50)
-        elementos.append(logo)
-    except:
-        pass
-
-    elementos.append(Spacer(1, 10))
-
-    titulo = Paragraph("<b>Simulador SISU - Resultados</b>", styles["Title"])
-    elementos.append(titulo)
-
-    elementos.append(Spacer(1, 15))
-
-    # ========================
-    # PREPARAR DADOS
-    # ========================
-
-    data = []
-
-    # cabeçalho
-    data.append([Paragraph(f"<b>{col}</b>", style) for col in df.columns])
-
-    # linhas
-    for _, row in df.iterrows():
-        linha = []
-        for item in row:
-            linha.append(Paragraph(str(item), style))
-        data.append(linha)
-
-    # ========================
-    # TABELA
-    # ========================
-
-    tabela = Table(
-        data,
-        repeatRows=1  # repete cabeçalho em cada página
-    )
-
-    tabela.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, 0), colors.darkblue),
+    estilo = TableStyle([
+        ("BACKGROUND", (0, 0), (-1, 0), colors.grey),
         ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-        ("GRID", (0, 0), (-1, -1), 0.25, colors.grey),
-        ("ALIGN", (3, 1), (-1, -1), "CENTER"),
-        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
-    ]))
+        ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+        ("GRID", (0, 0), (-1, -1), 0.5, colors.black),
+    ])
 
-    elementos.append(tabela)
+    tabela.setStyle(estilo)
 
-    doc.build(elementos)
+    doc.build([tabela])
 
     buffer.seek(0)
     return buffer
+
 # ========================
 # ABAS
 # ========================
