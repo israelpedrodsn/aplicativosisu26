@@ -53,28 +53,74 @@ df = pd.read_csv("dados.csv", sep=";", decimal=",")
 # FUNÇÃO PDF
 # ========================
 
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import getSampleStyleSheet
+from io import BytesIO
+
 def gerar_pdf(df):
     buffer = BytesIO()
-    doc = SimpleDocTemplate(buffer)
 
-    data = [df.columns.tolist()] + df.values.tolist()
+    doc = SimpleDocTemplate(
+        buffer,
+        pagesize=A4,
+        leftMargin=20,
+        rightMargin=20,
+        topMargin=20,
+        bottomMargin=20
+    )
 
-    tabela = Table(data)
+    styles = getSampleStyleSheet()
+    styleN = styles["Normal"]
 
-    estilo = TableStyle([
-        ("BACKGROUND", (0, 0), (-1, 0), colors.grey),
+    # reduzir colunas
+    df_pdf = df[[
+        "Universidade", "Curso", "Campus",
+        "Minha Nota", "Nota de Corte", "Chance"
+    ]]
+
+    # quebrar texto automaticamente
+    data = [df_pdf.columns.tolist()]
+    for row in df_pdf.values:
+        new_row = []
+        for cell in row:
+            new_row.append(Paragraph(str(cell), styleN))
+        data.append(new_row)
+
+    # largura das colunas 
+    col_widths = [70, 140, 120, 70, 80, 80]
+
+    tabela = Table(data, colWidths=col_widths)
+
+    tabela.setStyle(TableStyle([
+        # HEADER
+        ("BACKGROUND", (0, 0), (-1, 0), colors.darkblue),
         ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-        ("ALIGN", (0, 0), (-1, -1), "CENTER"),
-        ("GRID", (0, 0), (-1, -1), 0.5, colors.black),
-    ])
+        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
 
-    tabela.setStyle(estilo)
+        # CORPO
+        ("FONTNAME", (0, 1), (-1, -1), "Helvetica"),
+        ("FONTSIZE", (0, 0), (-1, -1), 8),
+
+        # ALINHAMENTO
+        ("ALIGN", (3, 1), (4, -1), "CENTER"),
+        ("ALIGN", (5, 1), (5, -1), "CENTER"),
+
+        # GRID
+        ("GRID", (0, 0), (-1, -1), 0.3, colors.grey),
+
+        # ESPAÇAMENTO
+        ("LEFTPADDING", (0, 0), (-1, -1), 5),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 5),
+        ("TOPPADDING", (0, 0), (-1, -1), 3),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
+    ]))
 
     doc.build([tabela])
 
     buffer.seek(0)
     return buffer
-
 # ========================
 # ABAS
 # ========================
