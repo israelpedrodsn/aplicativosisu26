@@ -106,14 +106,14 @@ def gerar_pdf(df):
 
 
 # ========================
-# ABAS (NOVA ABA ADICIONADA)
+# ABAS 
 # ========================
 aba0, aba1, aba2 = st.tabs(
     ["🧠 Simular por acertos", "🎓 Simulador SISU", "⚖️ Pesos dos cursos"]
 )
 
 # ========================
-# 🧠 NOVA ABA - ACERTOS
+# acertos
 # ========================
 with aba0:
     st.title("🧠 Simulação por número de acertos")
@@ -125,11 +125,11 @@ with aba0:
 
     col1, col2, col3, col4, col5 = st.columns(5)
 
-    ac_lc = col1.number_input("Linguagens (acertos)", 0, 45, 20)
-    ac_ch = col2.number_input("Humanas (acertos)", 0, 45, 20)
-    ac_cn = col3.number_input("Natureza (acertos)", 0, 45, 20)
-    ac_mt = col4.number_input("Matemática (acertos)", 0, 45, 20)
-    red = col5.number_input("Redação", 0.0, 1000.0, 600.0)
+    ac_lc = col1.number_input("Linguagens (acertos)", 0, 45, 20, key="ac_lc")
+    ac_ch = col2.number_input("Humanas (acertos)", 0, 45, 20, key="ac_ch")
+    ac_cn = col3.number_input("Natureza (acertos)", 0, 45, 20, key="ac_cn")
+    ac_mt = col4.number_input("Matemática (acertos)", 0, 45, 20, key="ac_mt")
+    red = col5.number_input("Redação", 0.0, 1000.0, 600.0, key="ac_red")
 
     def buscar_nota(acertos, coluna):
         linha = df_acertos[df_acertos["ACERTOS"] == acertos]
@@ -186,7 +186,7 @@ with aba0:
             st.success("Notas enviadas para o Simulador SISU! Vá para a próxima aba 🚀")
 
 # ========================
-# 🎓 SIMULADOR (MANTIDO + INTEGRAÇÃO)
+# simulador
 # ========================
 with aba1:
     st.title("🎓 Simulador SISU")
@@ -216,11 +216,11 @@ with aba1:
 
         col1, col2, col3, col4, col5 = st.columns(5)
 
-        redacao = col1.number_input("Redação", 0.0, 1000.0, float(notas_padrao.get("redacao", 600)))
-        humanas = col2.number_input("Humanas", 0.0, 1000.0, float(notas_padrao.get("humanas", 600)))
-        natureza = col3.number_input("Natureza", 0.0, 1000.0, float(notas_padrao.get("natureza", 600)))
-        linguagens = col4.number_input("Linguagens", 0.0, 1000.0, float(notas_padrao.get("linguagens", 600)))
-        matematica = col5.number_input("Matemática", 0.0, 1000.0, float(notas_padrao.get("matematica", 600)))
+        redacao = col1.number_input("Redação", 0.0, 1000.0, float(notas_padrao.get("redacao", 600)), key="sim_red")
+        humanas = col2.number_input("Humanas", 0.0, 1000.0, float(notas_padrao.get("humanas", 600)), key="sim_hum")
+        natureza = col3.number_input("Natureza", 0.0, 1000.0, float(notas_padrao.get("natureza", 600)), key="sim_nat")
+        linguagens = col4.number_input("Linguagens", 0.0, 1000.0, float(notas_padrao.get("linguagens", 600)), key="sim_lin")
+        matematica = col5.number_input("Matemática", 0.0, 1000.0, float(notas_padrao.get("matematica", 600)), key="sim_mat")
 
     if st.button("🚀 Calcular minhas chances"):
         df_result = df_filtrado.copy()
