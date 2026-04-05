@@ -53,7 +53,7 @@ df = pd.read_csv("dados.csv", sep=";", decimal=",")
 micro = pd.read_csv("microdados.csv", sep=";", decimal=",")
 
 # ========================
-# PDF
+# FUNÇÃO PDF
 # ========================
 
 def gerar_pdf(df):
@@ -73,13 +73,12 @@ def gerar_pdf(df):
     for row in df_pdf.values:
         data.append([Paragraph(str(cell), styleN) for cell in row])
 
-    tabela = Table(data, colWidths=[70, 140, 120, 70, 80, 80])
+    tabela = Table(data)
 
     tabela.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, 0), colors.darkblue),
         ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
         ("GRID", (0, 0), (-1, -1), 0.3, colors.grey),
-        ("FONTSIZE", (0, 0), (-1, -1), 8),
     ]))
 
     doc.build([tabela])
@@ -91,20 +90,20 @@ def gerar_pdf(df):
 # ========================
 
 aba0, aba1, aba2 = st.tabs([
-    "🎯 Acertos",
+    "🎯 Simulação por Acertos",
     "🎓 Simulador",
     "⚖️ Pesos dos cursos"
 ])
 
 # ========================
-# 🎯 ABA ACERTOS
+# 🎯 ABA 0 (NOVA)
 # ========================
 
 with aba0:
 
-    st.title("🎯 Simulação por acertos")
+    st.title("🎯 Simulação por número de acertos")
 
-    st.warning("⚠️ Estimativa baseada nas médias do ENEM 2023 e 2024. Pode variar.")
+    st.warning("⚠️ Estimativas baseadas nas médias do ENEM 2023 e 2024. Os valores reais podem variar.")
 
     col1, col2, col3, col4, col5 = st.columns(5)
 
@@ -112,7 +111,7 @@ with aba0:
     ac_ch = col2.number_input("Humanas", 0, 45, 30)
     ac_mt = col3.number_input("Matemática", 0, 45, 30)
     ac_cn = col4.number_input("Natureza", 0, 45, 30)
-    redacao_est = col5.number_input("Redação", 0.0, 1000.0, 700.0)
+    red = col5.number_input("Redação (estimada)", 0.0, 1000.0, 600.0)
 
     if st.button("📊 Calcular notas estimadas"):
 
@@ -120,7 +119,6 @@ with aba0:
             linha = micro[micro["ACERTOS"] == acertos]
             if linha.empty:
                 return 0, 0, 0
-
             return (
                 linha[f"MED_24_{area}"].values[0],
                 linha[f"MED_23_{area}"].values[0],
@@ -141,32 +139,27 @@ with aba0:
 
         st.dataframe(df_notas, hide_index=True)
 
-        escolha = st.selectbox(
-            "Escolha qual média usar:",
-            ["2024", "2023", "Geral"]
-        )
+        escolha = st.selectbox("Qual média usar?", ["2024", "2023", "Geral"])
 
         if st.button("🚀 Enviar para Simulador SISU"):
 
             if escolha == "2024":
-                notas = [lc[0], ch[0], mt[0], cn[0]]
+                st.session_state["notas"] = {
+                    "lc": lc[0], "ch": ch[0], "mt": mt[0], "cn": cn[0], "red": red
+                }
             elif escolha == "2023":
-                notas = [lc[1], ch[1], mt[1], cn[1]]
+                st.session_state["notas"] = {
+                    "lc": lc[1], "ch": ch[1], "mt": mt[1], "cn": cn[1], "red": red
+                }
             else:
-                notas = [lc[2], ch[2], mt[2], cn[2]]
-
-            st.session_state["notas"] = {
-                "linguagens": notas[0],
-                "humanas": notas[1],
-                "matematica": notas[2],
-                "natureza": notas[3],
-                "redacao": redacao_est
-            }
+                st.session_state["notas"] = {
+                    "lc": lc[2], "ch": ch[2], "mt": mt[2], "cn": cn[2], "red": red
+                }
 
             st.success("Notas enviadas! Vá para o Simulador SISU.")
 
 # ========================
-# 🎓 SIMULADOR (INALTERADO + INTEGRAÇÃO)
+# 🎓 SIMULADOR (INALTERADO + integração)
 # ========================
 
 with aba1:
@@ -180,11 +173,11 @@ with aba1:
 
         uni = st.multiselect("Universidade", sorted(df["universidade"].unique()))
 
-        df_filtrado = df[df["universidade"].isin(uni)] if uni else df
+        df_filtrado = df if len(uni) == 0 else df[df["universidade"].isin(uni)]
 
         curso = st.multiselect("Curso", sorted(df_filtrado["curso"].unique()))
 
-        if curso:
+        if len(curso) > 0:
             df_filtrado = df_filtrado[df_filtrado["curso"].isin(curso)]
 
     with col_notas:
@@ -194,11 +187,11 @@ with aba1:
 
         col1, col2, col3, col4, col5 = st.columns(5)
 
-        redacao = col1.number_input("Redação", 0.0, 1000.0, float(notas.get("redacao", 600)))
-        humanas = col2.number_input("Humanas", 0.0, 1000.0, float(notas.get("humanas", 600)))
-        natureza = col3.number_input("Natureza", 0.0, 1000.0, float(notas.get("natureza", 600)))
-        linguagens = col4.number_input("Linguagens", 0.0, 1000.0, float(notas.get("linguagens", 600)))
-        matematica = col5.number_input("Matemática", 0.0, 1000.0, float(notas.get("matematica", 600)))
+        redacao = col1.number_input("Redação", 0.0, 1000.0, float(notas.get("red", 600)))
+        humanas = col2.number_input("Humanas", 0.0, 1000.0, float(notas.get("ch", 600)))
+        natureza = col3.number_input("Natureza", 0.0, 1000.0, float(notas.get("cn", 600)))
+        linguagens = col4.number_input("Linguagens", 0.0, 1000.0, float(notas.get("lc", 600)))
+        matematica = col5.number_input("Matemática", 0.0, 1000.0, float(notas.get("mt", 600)))
 
     if st.button("🚀 Calcular minhas chances"):
 
@@ -224,9 +217,6 @@ with aba1:
 
         df_result["Chance"] = df_result["Diferença"].apply(classificar)
 
-        df_result["Minha Nota"] = df_result["Minha Nota"].round(1)
-        df_result["Diferença"] = df_result["Diferença"].round(1)
-
         df_result = df_result.sort_values(by="Diferença", ascending=False)
 
         st.dataframe(df_result, hide_index=True)
@@ -239,13 +229,13 @@ with aba2:
 
     st.title("⚖️ Pesos dos cursos")
 
-    uni_peso = st.multiselect("Universidade", sorted(df["universidade"].unique()))
+    uni = st.multiselect("Universidade", sorted(df["universidade"].unique()))
 
-    df_peso = df[df["universidade"].isin(uni_peso)] if uni_peso else df
+    df_peso = df if len(uni) == 0 else df[df["universidade"].isin(uni)]
 
-    curso_peso = st.multiselect("Curso", sorted(df_peso["curso"].unique()))
+    curso = st.multiselect("Curso", sorted(df_peso["curso"].unique()))
 
-    if curso_peso:
-        df_peso = df_peso[df_peso["curso"].isin(curso_peso)]
+    if len(curso) > 0:
+        df_peso = df_peso[df_peso["curso"].isin(curso)]
 
     st.dataframe(df_peso, hide_index=True)
