@@ -195,7 +195,9 @@ with aba0:
                     "linguagens": valores["lc"],
                     "matematica": valores["mt"],
                 }
-                st.success("Notas enviadas para o simulador SISU!")
+                st.success("Notas enviadas!")
+
+                st.rerun()
 
 
 # ========================
