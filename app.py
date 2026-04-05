@@ -265,9 +265,22 @@ with aba1:
                 st.caption(f"{row['universidade']} - {row['campus']}")
 
         df_view = df_result[[
-            "universidade","curso","campus","Minha Nota","nota corte","Diferença","Chance"
+            "universidade",
+            "curso",
+            "campus",
+            "turno",
+            "grau",
+            "Minha Nota",
+            "nota corte",
+            "Diferença",
+            "Chance"
         ]].rename(columns={
-            "universidade":"Universidade","curso":"Curso","campus":"Campus","nota corte":"Nota de Corte"
+            "universidade": "Universidade",
+            "curso": "Curso",
+            "campus": "Campus",
+            "turno": "Turno",
+            "grau": "Grau",
+            "nota corte": "Nota de Corte"
         })
 
         # 🔥 RESTAURADO: divisão por abas de chance
