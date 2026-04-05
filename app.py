@@ -145,55 +145,41 @@ with aba0:
             return None
         return float(linha.iloc[0][col])
 
-    # 2024
-    lc_24 = buscar_nota(ac_lc, "MED_24_LC")
-    ch_24 = buscar_nota(ac_ch, "MED_24_CH")
-    mt_24 = buscar_nota(ac_mt, "MED_24_MT")
-    cn_24 = buscar_nota(ac_cn, "MED_24_CN")
-
-    # 2023
-    lc_23 = buscar_nota(ac_lc, "MED_23_LC")
-    ch_23 = buscar_nota(ac_ch, "MED_23_CH")
-    mt_23 = buscar_nota(ac_mt, "MED_23_MT")
-    cn_23 = buscar_nota(ac_cn, "MED_23_CN")
-
-    # geral
+    # apenas média geral
     lc_g = buscar_nota(ac_lc, "MED_GERAL_LC")
     ch_g = buscar_nota(ac_ch, "MED_GERAL_CH")
     mt_g = buscar_nota(ac_mt, "MED_GERAL_MT")
     cn_g = buscar_nota(ac_cn, "MED_GERAL_CN")
+
+    st.markdown("### 📊 Resultados estimados")
 
     def formatar(valor):
         if valor is None:
             return "-"
         return f"{valor:.2f}".replace(".", ",")
 
-    st.markdown("### 📊 Resultados por área")
-
-    def card_area(nome, n24, n23, ng):
+    def card_area(nome, valor):
         st.markdown(f"#### {nome}")
-        c1, c2, c3 = st.columns(3)
-        c1.metric("📅 2024", formatar(n24))
-        c2.metric("📅 2023", formatar(n23))
-        c3.metric("📊 Geral", formatar(ng))
+        c1, c2, c3 = st.columns([1, 2, 1])
+        c2.metric("Nota estimada", formatar(valor))
         st.markdown("---")
 
-    card_area("📚 Linguagens", lc_24, lc_23, lc_g)
-    card_area("🌍 Humanas", ch_24, ch_23, ch_g)
-    card_area("📐 Matemática", mt_24, mt_23, mt_g)
-    card_area("🧪 Natureza", cn_24, cn_23, cn_g)
+    card_area("📚 Linguagens", lc_g)
+    card_area("🌍 Humanas", ch_g)
+    card_area("📐 Matemática", mt_g)
+    card_area("🧪 Natureza", cn_g)
 
     st.subheader("✍️ Redação")
     st.metric("Nota estimada", formatar(red))
 
-    st.info("💡 A coluna 'Geral' é a melhor estimativa para usar no simulador.")
+    st.info("💡 Esses valores já estão prontos para uso direto no simulador.")
 
     # ========================
     # 🚀 INTEGRAÇÃO COM SIMULADOR
     # ========================
     st.markdown("### 🚀 Enviar para o simulador")
 
-    if st.button("Usar notas gerais no Simulador SISU"):
+    if st.button("Usar notas no Simulador SISU"):
         if None not in (lc_g, ch_g, mt_g, cn_g):
             st.session_state["nota_linguagens_auto"] = lc_g
             st.session_state["nota_humanas_auto"] = ch_g
