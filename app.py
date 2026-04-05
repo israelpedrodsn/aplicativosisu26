@@ -113,9 +113,11 @@ aba0, aba1, aba2 = st.tabs([
 with aba0:
 
     st.title("📊 Simulador por número de acertos")
-    st.warning("⚠️ Valores estimados com base nas médias do ENEM 2023 e 2024. Pode haver variação real nas notas.")
+    st.warning("⚠️ Valores estimados com base nas médias do ENEM 2023 e 2024. Podem haver variações.")
 
-    st.markdown("---")
+    # ========================
+    # INPUTS
+    # ========================
 
     col1, col2, col3, col4, col5 = st.columns(5)
 
@@ -123,58 +125,88 @@ with aba0:
     ac_ch = col2.number_input("Humanas", 0, 45, 30, key="ac_ch")
     ac_cn = col3.number_input("Natureza", 0, 45, 30, key="ac_cn")
     ac_mt = col4.number_input("Matemática", 0, 45, 30, key="ac_mt")
-    red_sim = col5.number_input("Redação", 0.0, 1000.0, 600.0, key="ac_red")
+    red_sim = col5.number_input("Redação", 0.0, 1000.0, 600.0, key="red_sim")
+
+    # ========================
+    # FUNÇÃO
+    # ========================
 
     def buscar_nota(acertos, coluna):
         linha = df_acertos[df_acertos["ACERTOS"] == acertos]
         if linha.empty:
-            return 0
+            return None
         return float(linha[coluna].values[0])
 
-    st.markdown("")
+    # ========================
+    # BOTÃO
+    # ========================
 
-    if st.button("🚀 Calcular notas estimadas"):
+    if st.button("📊 Calcular notas estimadas"):
 
-        resultados = {
-            "📅 ENEM 2024": {
+        st.session_state["resultado_acertos"] = {
+            "2024": {
                 "lc": buscar_nota(ac_lc, "MED_24_LC"),
                 "ch": buscar_nota(ac_ch, "MED_24_CH"),
                 "cn": buscar_nota(ac_cn, "MED_24_CN"),
                 "mt": buscar_nota(ac_mt, "MED_24_MT"),
             },
-            "📅 ENEM 2023": {
+            "2023": {
                 "lc": buscar_nota(ac_lc, "MED_23_LC"),
                 "ch": buscar_nota(ac_ch, "MED_23_CH"),
                 "cn": buscar_nota(ac_cn, "MED_23_CN"),
                 "mt": buscar_nota(ac_mt, "MED_23_MT"),
             },
-            "📊 Média Geral": {
+            "GERAL": {
                 "lc": buscar_nota(ac_lc, "MED_GERAL_LC"),
                 "ch": buscar_nota(ac_ch, "MED_GERAL_CH"),
                 "cn": buscar_nota(ac_cn, "MED_GERAL_CN"),
                 "mt": buscar_nota(ac_mt, "MED_GERAL_MT"),
-            }
+            },
+            "redacao": red_sim
         }
 
-        st.markdown("---")
-        st.subheader("📈 Suas notas estimadas")
+    # ========================
+    # MOSTRAR RESULTADOS (SEM RESET)
+    # ========================
 
-        for nome, valores in resultados.items():
+    if "resultado_acertos" in st.session_state:
 
-            st.markdown(f"### {nome}")
+        resultados = st.session_state["resultado_acertos"]
 
-            c1, c2, c3, c4, c5 = st.columns(5)
+        st.subheader("📈 Resultados estimados")
 
-            c1.metric("Linguagens", round(valores["lc"], 1))
-            c2.metric("Humanas", round(valores["ch"], 1))
-            c3.metric("Natureza", round(valores["cn"], 1))
-            c4.metric("Matemática", round(valores["mt"], 1))
-            c5.metric("Redação", round(red_sim, 1))
+        for ano, valores in resultados.items():
 
+            if ano == "redacao":
+                continue
 
+            with st.container():
+                st.markdown(f"### 📅 {ano}")
 
-        st.markdown("---")
-        st.info("👉 Dica: copie os valores acima e cole manualmente no Simulador SISU para ver suas chances.")
+                c1, c2, c3, c4 = st.columns(4)
+
+                c1.metric("Linguagens", valores["lc"])
+                c2.metric("Humanas", valores["ch"])
+                c3.metric("Natureza", valores["cn"])
+                c4.metric("Matemática", valores["mt"])
+
+                st.metric("Redação", resultados["redacao"])
+
+                # ========================
+                # TRANSFERÊNCIA MANUAL (BONITA)
+                # ========================
+
+                st.markdown("👉 Use esses valores no simulador SISU:")
+
+                col_copy1, col_copy2, col_copy3, col_copy4, col_copy5 = st.columns(5)
+
+                col_copy1.code(valores["lc"])
+                col_copy2.code(valores["ch"])
+                col_copy3.code(valores["cn"])
+                col_copy4.code(valores["mt"])
+                col_copy5.code(resultados["redacao"])
+
+                st.markdown("---")
 # ========================
 # 🎓 SIMULADOR SISU
 # ========================
