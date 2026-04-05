@@ -268,8 +268,7 @@ with aba1:
             "universidade",
             "curso",
             "campus",
-            "turno",
-            "grau",
+            "turno/grau",
             "Minha Nota",
             "nota corte",
             "Diferença",
@@ -278,7 +277,7 @@ with aba1:
             "universidade": "Universidade",
             "curso": "Curso",
             "campus": "Campus",
-            "turno": "Turno",
+            "turno/grau": "Turno (grau)",
             "grau": "Grau",
             "nota corte": "Nota de Corte"
         })
