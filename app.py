@@ -134,8 +134,9 @@ abas_nomes = [
 if "aba_atual" not in st.session_state:
     st.session_state["aba_atual"] = 0
 
-aba0, aba1, aba2 = st.tabs(abas_nomes)
+aba_index = st.session_state["aba_atual"]
 
+aba0, aba1, aba2 = st.tabs(abas_nomes)
 # ========================
 # 📊 SIMULADOR POR ACERTOS
 # ========================
@@ -202,7 +203,10 @@ with aba0:
                     "matematica": valores["mt"],
                 }
 
-                st.session_state["aba_atual"] = 1  # vai pro SISU
+                st.session_state["aba_atual"] = 1  
+                for key in ["Redação", "Humanas", "Natureza", "Linguagens", "Matemática"]:
+                    if key in st.session_state:
+                        del st.session_state[key]
                 st.rerun()
 
 
@@ -252,18 +256,18 @@ with aba1:
         mat_default = 600.0
 
         # se vier do simulador de acertos
-        if "notas_exportadas" in st.session_state:
+        if "notas_exportadas" in st.session_state and st.session_state["aba_atual"] == 1:
             red_default = st.session_state["notas_exportadas"]["redacao"]
             hum_default = st.session_state["notas_exportadas"]["humanas"]
             nat_default = st.session_state["notas_exportadas"]["natureza"]
             lin_default = st.session_state["notas_exportadas"]["linguagens"]
             mat_default = st.session_state["notas_exportadas"]["matematica"]
 
-        redacao = col1.number_input("Redação", 0.0, 1000.0, red_default, step=None)
-        humanas = col2.number_input("Humanas", 0.0, 1000.0, hum_default, step=None)
-        natureza = col3.number_input("Natureza", 0.0, 1000.0, nat_default, step=None)
-        linguagens = col4.number_input("Linguagens", 0.0, 1000.0, lin_default, step=None)
-        matematica = col5.number_input("Matemática", 0.0, 1000.0, mat_default, step=None)
+        redacao = col1.number_input("Redação", 0.0, 1000.0, red_default, step=None, key="Redação")
+        humanas = col2.number_input("Humanas", 0.0, 1000.0, hum_default, step=None, key="Humanas")
+        natureza = col3.number_input("Natureza", 0.0, 1000.0, nat_default, step=None, key="Natureza")
+        linguagens = col4.number_input("Linguagens", 0.0, 1000.0, lin_default, step=None, key="Linguagens")
+        matematica = col5.number_input("Matemática", 0.0, 1000.0, mat_default, step=None, key="Matemática")
 
     if st.button("🚀 Calcular minhas chances"):
 
@@ -425,7 +429,7 @@ with aba2:
     })
     st.subheader("📊 Pesos por curso")
     st.dataframe(tabela_pesos, hide_index=True)
-    
+
     # Forçar navegação entre abas
 if st.session_state["aba_atual"] == 1:
     with aba1:
