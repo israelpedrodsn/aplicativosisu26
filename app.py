@@ -228,29 +228,7 @@ with aba1:
 
         df_result = df_filtrado.copy()
 
-# ========================
-# TOP 3
-# ========================
 
-    st.subheader("🏆 Melhores Opções")
-
-    aprovados = df_result[df_result["Diferença"] >= 0]
-
-    if not aprovados.empty:
-        top3 = aprovados.sort_values(by="nota corte", ascending=False).head(3)
-    else:
-        top3 = df_result.head(3)
-
-    cols = st.columns(3)
-
-    for i, (_, row) in enumerate(top3.iterrows()):
-        with cols[i]:
-            st.metric(
-                row["curso"],
-                f"{row['Minha Nota']}",
-                f"{row['Diferença']} pts"
-            )
-            st.caption(f"{row['universidade']} - {row['campus']}")
 
         df_result["Minha Nota"] = (
             redacao * df_result["redacao"] +
@@ -266,7 +244,29 @@ with aba1:
             lambda d: "Alta chance" if d >= 0 else "Média" if d >= -10 else "Baixa"
         )
 
-    
+    # ========================
+# TOP 3
+# ========================
+
+st.subheader("🏆 Melhores Opções")
+
+aprovados = df_result[df_result["Diferença"] >= 0]
+
+if not aprovados.empty:
+    top3 = aprovados.sort_values(by="nota corte", ascending=False).head(3)
+else:
+    top3 = df_result.head(3)
+
+cols = st.columns(3)
+
+for i, (_, row) in enumerate(top3.iterrows()):
+    with cols[i]:
+        st.metric(
+            row["curso"],
+            f"{row['Minha Nota']}",
+            f"{row['Diferença']} pts"
+        )
+        st.caption(f"{row['universidade']} - {row['campus']}")
 
         df_view = df_result[[
             "universidade", "curso", "campus",
