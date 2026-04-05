@@ -167,7 +167,7 @@ with aba0:
 
     st.markdown("---")
 
-    st.info("💡 Use essas notas diretamente no simulador SISU.")
+    st.info("💡 Use essas notas diretamente no Simulador SISU.")
 
     # ========================
     # 🚀 INTEGRAÇÃO
