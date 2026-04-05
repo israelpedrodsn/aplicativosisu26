@@ -183,16 +183,16 @@ with aba0:
         else:
             st.error("Preencha corretamente os acertos.")
 
-# ========================
-# BOTÕES AUXILIARES
-# ========================
-st.markdown("---")
+    # ========================
+    # BOTÕES AUXILIARES
+    # ========================
+    st.markdown("---")
 
-if st.button("Já sei minhas notas no ENEM"):
-    st.info("👉 Vá para a aba 🎓 Simulador para inserir suas notas manualmente.")
+    if st.button("Já sei minhas notas no ENEM"):
+        st.info("👉 Vá para a aba 🎓 Simulador para inserir suas notas manualmente.")
 
-if st.button("Quero descobrir os pesos para um curso"):
-    st.info("👉 Vá para a aba ⚖️ Pesos dos cursos para ver como sua nota é calculada.")
+    if st.button("Quero descobrir os pesos para um curso"):
+        st.info("👉 Vá para a aba ⚖️ Pesos dos cursos para ver como sua nota é calculada.")
 
 # ========================
 # SIMULADOR
