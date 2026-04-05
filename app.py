@@ -125,11 +125,16 @@ def gerar_pdf(df):
 # ABAS
 # ========================
 
-aba0, aba1, aba2 = st.tabs([
+abas_nomes = [
     "📊 Simulador por Acertos",
     "🎓 Simulador SISU",
     "⚖️ Pesos dos cursos"
-])
+]
+
+if "aba_atual" not in st.session_state:
+    st.session_state["aba_atual"] = 0
+
+aba0, aba1, aba2 = st.tabs(abas_nomes)
 
 # ========================
 # 📊 SIMULADOR POR ACERTOS
@@ -188,6 +193,7 @@ with aba0:
             st.write(f"Redação: {red_sim}")
 
             if st.button(f"➡️ Usar {ano} no simulador SISU"):
+
                 st.session_state["notas_exportadas"] = {
                     "redacao": red_sim,
                     "humanas": valores["ch"],
@@ -195,8 +201,8 @@ with aba0:
                     "linguagens": valores["lc"],
                     "matematica": valores["mt"],
                 }
-                st.success("Notas enviadas!")
 
+                st.session_state["aba_atual"] = 1  # vai pro SISU
                 st.rerun()
 
 
@@ -419,3 +425,14 @@ with aba2:
     })
     st.subheader("📊 Pesos por curso")
     st.dataframe(tabela_pesos, hide_index=True)
+    
+    # Forçar navegação entre abas
+if st.session_state["aba_atual"] == 1:
+    with aba1:
+        pass
+elif st.session_state["aba_atual"] == 2:
+    with aba2:
+        pass
+else:
+    with aba0:
+        pass
