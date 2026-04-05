@@ -145,40 +145,33 @@ with aba0:
             return None
         return float(linha.iloc[0][col])
 
-    # apenas média geral
+    # SOMENTE MÉDIA GERAL
     lc_g = buscar_nota(ac_lc, "MED_GERAL_LC")
     ch_g = buscar_nota(ac_ch, "MED_GERAL_CH")
     mt_g = buscar_nota(ac_mt, "MED_GERAL_MT")
     cn_g = buscar_nota(ac_cn, "MED_GERAL_CN")
 
-    st.markdown("### 📊 Resultados estimados")
+    def formatar(v):
+        return "-" if v is None else f"{v:.2f}".replace(".", ",")
 
-    def formatar(valor):
-        if valor is None:
-            return "-"
-        return f"{valor:.2f}".replace(".", ",")
+    st.markdown("### 📊 Notas estimadas (média geral)")
 
-    def card_area(nome, valor):
-        st.markdown(f"#### {nome}")
-        c1, c2, c3 = st.columns([1, 2, 1])
-        c2.metric("Nota estimada", formatar(valor))
-        st.markdown("---")
+    # estilo tabela horizontal
+    colA, colB, colC, colD, colE = st.columns(5)
 
-    card_area("📚 Linguagens", lc_g)
-    card_area("🌍 Humanas", ch_g)
-    card_area("📐 Matemática", mt_g)
-    card_area("🧪 Natureza", cn_g)
+    colA.metric("📚 Linguagens", formatar(lc_g))
+    colB.metric("🌍 Humanas", formatar(ch_g))
+    colC.metric("📐 Matemática", formatar(mt_g))
+    colD.metric("🧪 Natureza", formatar(cn_g))
+    colE.metric("✍️ Redação", formatar(red))
 
-    st.subheader("✍️ Redação")
-    st.metric("Nota estimada", formatar(red))
+    st.markdown("---")
 
-    st.info("💡 Esses valores já estão prontos para uso direto no simulador.")
+    st.info("💡 Use essas notas diretamente no simulador SISU.")
 
     # ========================
-    # 🚀 INTEGRAÇÃO COM SIMULADOR
+    # 🚀 INTEGRAÇÃO
     # ========================
-    st.markdown("### 🚀 Enviar para o simulador")
-
     if st.button("Usar notas no Simulador SISU"):
         if None not in (lc_g, ch_g, mt_g, cn_g):
             st.session_state["nota_linguagens_auto"] = lc_g
@@ -186,10 +179,9 @@ with aba0:
             st.session_state["nota_matematica_auto"] = mt_g
             st.session_state["nota_natureza_auto"] = cn_g
             st.session_state["nota_redacao_auto"] = red
-
             st.success("Notas enviadas! Vá para a aba 🎓 Simulador.")
         else:
-            st.error("Preencha corretamente os acertos para gerar as notas.")
+            st.error("Preencha corretamente os acertos.")
 
 # ========================
 # 🎓 SIMULADOR
