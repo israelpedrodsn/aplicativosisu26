@@ -192,21 +192,7 @@ with aba0:
 
                 st.metric("Redação", resultados["redacao"])
 
-                # ========================
-                # TRANSFERÊNCIA MANUAL (BONITA)
-                # ========================
 
-                st.markdown("👉 Use esses valores no simulador SISU:")
-
-                col_copy1, col_copy2, col_copy3, col_copy4, col_copy5 = st.columns(5)
-
-                col_copy1.code(valores["lc"])
-                col_copy2.code(valores["ch"])
-                col_copy3.code(valores["cn"])
-                col_copy4.code(valores["mt"])
-                col_copy5.code(resultados["redacao"])
-
-                st.markdown("---")
 # ========================
 # 🎓 SIMULADOR SISU
 # ========================
