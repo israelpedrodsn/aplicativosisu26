@@ -117,11 +117,11 @@ with aba0:
 
     col1, col2, col3, col4, col5 = st.columns(5)
 
-    ac_lc = col1.number_input("Linguagens (acertos)", 0, 45, 30)
-    ac_ch = col2.number_input("Humanas (acertos)", 0, 45, 30)
-    ac_cn = col3.number_input("Natureza (acertos)", 0, 45, 30)
-    ac_mt = col4.number_input("Matemática (acertos)", 0, 45, 30)
-    red_sim = col5.number_input("Redação estimada", 0.0, 1000.0, 600.0)
+    ac_lc = col1.number_input("Linguagens (acertos)", 0, 45, 30, key="ac_lc")
+    ac_ch = col2.number_input("Humanas (acertos)", 0, 45, 30, key="ac_ch")
+    ac_cn = col3.number_input("Natureza (acertos)", 0, 45, 30, key="ac_cn")
+    ac_mt = col4.number_input("Matemática (acertos)", 0, 45, 30, key="ac_mt")
+    red_sim = col5.number_input("Redação estimada", 0.0, 1000.0, 600.0, key="ac_red")
 
     def buscar_nota(acertos, coluna):
         linha = df_acertos[df_acertos["ACERTOS"] == acertos]
@@ -172,10 +172,10 @@ with aba1:
     col_filtros, col_notas = st.columns([1, 2])
 
     with col_filtros:
-        uni = st.multiselect("Universidade", sorted(df["universidade"].unique()))
+        uni = st.multiselect("Universidade", sorted(df["universidade"].unique()), key="sisu_uni")
         df_filtrado = df if not uni else df[df["universidade"].isin(uni)]
 
-        curso = st.multiselect("Curso", sorted(df_filtrado["curso"].unique()))
+        curso = st.multiselect("Curso", sorted(df_filtrado["curso"].unique()), key="sisu_curso")
         if curso:
             df_filtrado = df_filtrado[df_filtrado["curso"].isin(curso)]
 
@@ -234,10 +234,10 @@ with aba1:
 with aba2:
     st.title("⚖️ Pesos dos cursos")
 
-    uni = st.multiselect("Universidade", sorted(df["universidade"].unique()))
+    uni = st.multiselect("Universidade", sorted(df["universidade"].unique()), key="peso_uni")
     df_peso = df if not uni else df[df["universidade"].isin(uni)]
 
-    curso = st.multiselect("Curso", sorted(df_peso["curso"].unique()))
+    curso = st.multiselect("Curso", sorted(df_peso["curso"].unique()), key="peso_curso")
     if curso:
         df_peso = df_peso[df_peso["curso"].isin(curso)]
 
