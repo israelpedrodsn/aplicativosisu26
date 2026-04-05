@@ -2,8 +2,10 @@ import streamlit as st
 import pandas as pd
 
 # PDF
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import getSampleStyleSheet
 from io import BytesIO
 
 # ========================
@@ -21,7 +23,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ========================
-# 🔐 SISTEMA DE SENHA
+# 🔐 SENHA
 # ========================
 
 SENHA_CORRETA = st.secrets["senha"]
@@ -51,12 +53,8 @@ df = pd.read_csv("dados.csv", sep=";", decimal=",")
 micro = pd.read_csv("microdados.csv", sep=";", decimal=",")
 
 # ========================
-# FUNÇÃO PDF
+# PDF
 # ========================
-
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
-from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import getSampleStyleSheet
 
 def gerar_pdf(df):
     buffer = BytesIO()
@@ -73,7 +71,7 @@ def gerar_pdf(df):
 
     data = [df_pdf.columns.tolist()]
     for row in df_pdf.values:
-        data.append([Paragraph(str(c), styleN) for c in row])
+        data.append([Paragraph(str(cell), styleN) for cell in row])
 
     tabela = Table(data, colWidths=[70, 140, 120, 70, 80, 80])
 
@@ -93,34 +91,35 @@ def gerar_pdf(df):
 # ========================
 
 aba0, aba1, aba2 = st.tabs([
-    "🎯 Simulação por acertos",
+    "🎯 Acertos",
     "🎓 Simulador",
     "⚖️ Pesos dos cursos"
 ])
 
 # ========================
-# 🎯 NOVA ABA (ACERTOS)
+# 🎯 ABA ACERTOS
 # ========================
 
 with aba0:
 
-    st.title("🎯 Simulação por número de acertos")
+    st.title("🎯 Simulação por acertos")
 
-    st.warning("⚠️ Valores aproximados baseados nas médias do ENEM 2023 e 2024.")
+    st.warning("⚠️ Estimativa baseada nas médias do ENEM 2023 e 2024. Pode variar.")
 
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4, col5 = st.columns(5)
 
     ac_lc = col1.number_input("Linguagens", 0, 45, 30)
     ac_ch = col2.number_input("Humanas", 0, 45, 30)
     ac_mt = col3.number_input("Matemática", 0, 45, 30)
     ac_cn = col4.number_input("Natureza", 0, 45, 30)
+    redacao_est = col5.number_input("Redação", 0.0, 1000.0, 700.0)
 
     if st.button("📊 Calcular notas estimadas"):
 
         def buscar(area, acertos):
             linha = micro[micro["ACERTOS"] == acertos]
             if linha.empty:
-                return (0, 0, 0)
+                return 0, 0, 0
 
             return (
                 linha[f"MED_24_{area}"].values[0],
@@ -133,21 +132,21 @@ with aba0:
         mt = buscar("MT", ac_mt)
         cn = buscar("CN", ac_cn)
 
-        tabela = pd.DataFrame({
+        df_notas = pd.DataFrame({
             "Área": ["Linguagens", "Humanas", "Matemática", "Natureza"],
             "2024": [lc[0], ch[0], mt[0], cn[0]],
             "2023": [lc[1], ch[1], mt[1], cn[1]],
             "Geral": [lc[2], ch[2], mt[2], cn[2]],
         })
 
-        st.dataframe(tabela, hide_index=True)
+        st.dataframe(df_notas, hide_index=True)
 
         escolha = st.selectbox(
-            "Qual média usar no simulador?",
+            "Escolha qual média usar:",
             ["2024", "2023", "Geral"]
         )
 
-        if st.button("🚀 Usar no Simulador SISU"):
+        if st.button("🚀 Enviar para Simulador SISU"):
 
             if escolha == "2024":
                 notas = [lc[0], ch[0], mt[0], cn[0]]
@@ -156,17 +155,18 @@ with aba0:
             else:
                 notas = [lc[2], ch[2], mt[2], cn[2]]
 
-            st.session_state["notas_auto"] = {
+            st.session_state["notas"] = {
                 "linguagens": notas[0],
                 "humanas": notas[1],
                 "matematica": notas[2],
-                "natureza": notas[3]
+                "natureza": notas[3],
+                "redacao": redacao_est
             }
 
-            st.success("Notas enviadas para o simulador!")
+            st.success("Notas enviadas! Vá para o Simulador SISU.")
 
 # ========================
-# 🎓 SIMULADOR (INALTERADO + integração)
+# 🎓 SIMULADOR (INALTERADO + INTEGRAÇÃO)
 # ========================
 
 with aba1:
@@ -178,19 +178,11 @@ with aba1:
     with col_filtros:
         st.subheader("🔎 Filtros")
 
-        uni = st.multiselect(
-            "Universidade",
-            sorted(df["universidade"].unique()),
-            key="sim_uni"
-        )
+        uni = st.multiselect("Universidade", sorted(df["universidade"].unique()))
 
         df_filtrado = df[df["universidade"].isin(uni)] if uni else df
 
-        curso = st.multiselect(
-            "Curso",
-            sorted(df_filtrado["curso"].unique()),
-            key="sim_curso"
-        )
+        curso = st.multiselect("Curso", sorted(df_filtrado["curso"].unique()))
 
         if curso:
             df_filtrado = df_filtrado[df_filtrado["curso"].isin(curso)]
@@ -198,15 +190,15 @@ with aba1:
     with col_notas:
         st.subheader("📊 Suas notas")
 
-        notas_auto = st.session_state.get("notas_auto", {})
+        notas = st.session_state.get("notas", {})
 
         col1, col2, col3, col4, col5 = st.columns(5)
 
-        redacao = col1.number_input("Redação", 0.0, 1000.0, 600.0, step=None)
-        humanas = col2.number_input("Humanas", 0.0, 1000.0, float(notas_auto.get("humanas", 600)))
-        natureza = col3.number_input("Natureza", 0.0, 1000.0, float(notas_auto.get("natureza", 600)))
-        linguagens = col4.number_input("Linguagens", 0.0, 1000.0, float(notas_auto.get("linguagens", 600)))
-        matematica = col5.number_input("Matemática", 0.0, 1000.0, float(notas_auto.get("matematica", 600)))
+        redacao = col1.number_input("Redação", 0.0, 1000.0, float(notas.get("redacao", 600)))
+        humanas = col2.number_input("Humanas", 0.0, 1000.0, float(notas.get("humanas", 600)))
+        natureza = col3.number_input("Natureza", 0.0, 1000.0, float(notas.get("natureza", 600)))
+        linguagens = col4.number_input("Linguagens", 0.0, 1000.0, float(notas.get("linguagens", 600)))
+        matematica = col5.number_input("Matemática", 0.0, 1000.0, float(notas.get("matematica", 600)))
 
     if st.button("🚀 Calcular minhas chances"):
 
@@ -247,17 +239,11 @@ with aba2:
 
     st.title("⚖️ Pesos dos cursos")
 
-    uni_peso = st.multiselect(
-        "Universidade",
-        sorted(df["universidade"].unique())
-    )
+    uni_peso = st.multiselect("Universidade", sorted(df["universidade"].unique()))
 
     df_peso = df[df["universidade"].isin(uni_peso)] if uni_peso else df
 
-    curso_peso = st.multiselect(
-        "Curso",
-        sorted(df_peso["curso"].unique())
-    )
+    curso_peso = st.multiselect("Curso", sorted(df_peso["curso"].unique()))
 
     if curso_peso:
         df_peso = df_peso[df_peso["curso"].isin(curso_peso)]
