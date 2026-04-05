@@ -197,26 +197,7 @@ with aba0:
     mostrar_card("📅 Média ENEM 2023", resultados["2023"])
     mostrar_card("📊 Média Geral", resultados["GERAL"])
 
-    # ========================
-    # AJUDA PARA USO NO SISU
-    # ========================
 
-    st.markdown("### 📋 Copiar valores para o simulador SISU")
-
-    opcao = st.selectbox(
-        "Qual conjunto deseja usar?",
-        ["2024", "2023", "GERAL"]
-    )
-
-    valores = resultados[opcao]
-
-    col_copy1, col_copy2, col_copy3, col_copy4, col_copy5 = st.columns(5)
-
-    col_copy1.code(valores["lc"])
-    col_copy2.code(valores["ch"])
-    col_copy3.code(valores["cn"])
-    col_copy4.code(valores["mt"])
-    col_copy5.code(red_sim)
 # ========================
 # 🎓 SIMULADOR SISU
 # ========================
