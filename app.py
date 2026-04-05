@@ -145,16 +145,6 @@ with aba0:
             return None
         return float(linha.iloc[0][col])
 
-    lc_24 = buscar_nota(ac_lc, "MED_24_LC")
-    ch_24 = buscar_nota(ac_ch, "MED_24_CH")
-    mt_24 = buscar_nota(ac_mt, "MED_24_MT")
-    cn_24 = buscar_nota(ac_cn, "MED_24_CN")
-
-    lc_23 = buscar_nota(ac_lc, "MED_23_LC")
-    ch_23 = buscar_nota(ac_ch, "MED_23_CH")
-    mt_23 = buscar_nota(ac_mt, "MED_23_MT")
-    cn_23 = buscar_nota(ac_cn, "MED_23_CN")
-
     lc_g = buscar_nota(ac_lc, "MED_GERAL_LC")
     ch_g = buscar_nota(ac_ch, "MED_GERAL_CH")
     mt_g = buscar_nota(ac_mt, "MED_GERAL_MT")
@@ -163,20 +153,11 @@ with aba0:
     def formatar(v):
         return "-" if v is None else f"{v:.2f}".replace(".", ",")
 
-    def card(nome, a, b, c):
-        st.markdown(f"#### {nome}")
-        x, y, z = st.columns(3)
-        x.metric("2024", formatar(a))
-        y.metric("2023", formatar(b))
-        z.metric("Geral", formatar(c))
-        st.markdown("---")
-
-    card("📚 Linguagens", lc_24, lc_23, lc_g)
-    card("🌍 Humanas", ch_24, ch_23, ch_g)
-    card("📐 Matemática", mt_24, mt_23, mt_g)
-    card("🧪 Natureza", cn_24, cn_23, cn_g)
-
-    st.metric("✍️ Redação", formatar(red))
+    st.metric("Linguagens", formatar(lc_g))
+    st.metric("Humanas", formatar(ch_g))
+    st.metric("Matemática", formatar(mt_g))
+    st.metric("Natureza", formatar(cn_g))
+    st.metric("Redação", formatar(red))
 
     if st.button("Usar notas gerais no Simulador SISU"):
         if None not in (lc_g, ch_g, mt_g, cn_g):
@@ -190,7 +171,7 @@ with aba0:
             st.error("Preencha corretamente os acertos.")
 
 # ========================
-# 🎓 SIMULADOR (BASE MANTIDA)
+# 🎓 SIMULADOR
 # ========================
 with aba1:
     st.title("🎓 Simulador SISU")
@@ -265,8 +246,35 @@ with aba1:
             "universidade":"Universidade","curso":"Curso","campus":"Campus","nota corte":"Nota de Corte"
         })
 
+        # 🔥 RESTAURADO: divisão por abas de chance
+        df_alta = df_view[df_view["Chance"] == "Alta chance"]
+        df_media = df_view[df_view["Chance"] == "Média"]
+        df_baixa = df_view[df_view["Chance"] == "Baixa"]
+
+        abas = []
+        nomes = []
+
+        if not df_alta.empty:
+            abas.append(df_alta)
+            nomes.append("🟢 Alta chance")
+
+        if not df_media.empty:
+            abas.append(df_media)
+            nomes.append("🟡 Média")
+
+        if not df_baixa.empty:
+            abas.append(df_baixa)
+            nomes.append("🔴 Baixa")
+
         st.subheader("📊 Resultados")
-        st.dataframe(df_view, hide_index=True)
+
+        if abas:
+            tabs = st.tabs(nomes)
+            for tab, tabela in zip(tabs, abas):
+                with tab:
+                    st.dataframe(tabela, hide_index=True)
+        else:
+            st.warning("Nenhum resultado encontrado.")
 
         st.markdown("---")
         st.subheader("📥 Exportar resultados")
@@ -281,7 +289,7 @@ with aba1:
         )
 
 # ========================
-# ⚖️ PESOS (INALTERADO)
+# ⚖️ PESOS
 # ========================
 with aba2:
     st.title("⚖️ Pesos dos cursos")
