@@ -186,15 +186,13 @@ with aba0:
 # ========================
 # BOTÕES AUXILIARES
 # ========================
-col1, col2 = st.columns(2)
+st.markdown("---")
 
-with col1:
-    if st.button("Já sei minhas notas no ENEM"):
-        st.info("👉 Vá para a aba 🎓 Simulador para inserir suas notas manualmente.")
+if st.button("Já sei minhas notas no ENEM"):
+    st.info("👉 Vá para a aba 🎓 Simulador para inserir suas notas manualmente.")
 
-with col2:
-    if st.button("Quero descobrir os pesos para um curso"):
-        st.info("👉 Vá para a aba ⚖️ Pesos dos cursos para explorar os pesos.")
+if st.button("Quero descobrir os pesos para um curso"):
+    st.info("👉 Vá para a aba ⚖️ Pesos dos cursos para ver como sua nota é calculada.")
 
 # ========================
 # SIMULADOR
