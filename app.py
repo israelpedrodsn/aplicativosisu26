@@ -49,15 +49,14 @@ if not st.session_state["autenticado"]:
 
 df = pd.read_csv("dados.csv", sep=";", decimal=",")
 df_acertos = pd.read_csv("microdados_acertos.csv", sep=";", decimal=",")
+
 # ========================
 # FUNÇÃO PDF
 # ========================
 
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
-from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet
-from io import BytesIO
 
 def gerar_pdf(df):
     buffer = BytesIO()
@@ -74,69 +73,39 @@ def gerar_pdf(df):
     styles = getSampleStyleSheet()
     styleN = styles["Normal"]
 
-    # reduzir colunas
     df_pdf = df[[
         "Universidade", "Curso", "Campus",
         "Minha Nota", "Nota de Corte", "Chance"
     ]]
 
-    # quebrar texto automaticamente
     data = [df_pdf.columns.tolist()]
     for row in df_pdf.values:
-        new_row = []
-        for cell in row:
-            new_row.append(Paragraph(str(cell), styleN))
-        data.append(new_row)
+        data.append([Paragraph(str(cell), styleN) for cell in row])
 
-    # largura das colunas 
-    col_widths = [70, 140, 120, 70, 80, 80]
-
-    tabela = Table(data, colWidths=col_widths)
+    tabela = Table(data, colWidths=[70, 140, 120, 70, 80, 80])
 
     tabela.setStyle(TableStyle([
-        # HEADER
         ("BACKGROUND", (0, 0), (-1, 0), colors.darkblue),
         ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
         ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-
-        # CORPO
-        ("FONTNAME", (0, 1), (-1, -1), "Helvetica"),
         ("FONTSIZE", (0, 0), (-1, -1), 8),
-
-        # ALINHAMENTO
-        ("ALIGN", (3, 1), (4, -1), "CENTER"),
-        ("ALIGN", (5, 1), (5, -1), "CENTER"),
-
-        # GRID
         ("GRID", (0, 0), (-1, -1), 0.3, colors.grey),
-
-        # ESPAÇAMENTO
-        ("LEFTPADDING", (0, 0), (-1, -1), 5),
-        ("RIGHTPADDING", (0, 0), (-1, -1), 5),
-        ("TOPPADDING", (0, 0), (-1, -1), 3),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
     ]))
 
     doc.build([tabela])
-
     buffer.seek(0)
     return buffer
+
 # ========================
 # ABAS
 # ========================
 
-abas_nomes = [
+aba0, aba1, aba2 = st.tabs([
     "📊 Simulador por Acertos",
     "🎓 Simulador SISU",
     "⚖️ Pesos dos cursos"
-]
+])
 
-if "aba_atual" not in st.session_state:
-    st.session_state["aba_atual"] = 0
-
-aba_index = st.session_state["aba_atual"]
-
-aba0, aba1, aba2 = st.tabs(abas_nomes)
 # ========================
 # 📊 SIMULADOR POR ACERTOS
 # ========================
@@ -144,7 +113,7 @@ aba0, aba1, aba2 = st.tabs(abas_nomes)
 with aba0:
 
     st.title("📊 Simulador por número de acertos")
-    st.warning("⚠️ Valores estimados com base nas médias do ENEM 2023 e 2024. Podem haver grandes variações de nota.")
+    st.warning("⚠️ Valores estimados com base nas médias do ENEM 2023 e 2024.")
 
     col1, col2, col3, col4, col5 = st.columns(5)
 
@@ -193,81 +162,31 @@ with aba0:
             st.write(f"Matemática: {valores['mt']}")
             st.write(f"Redação: {red_sim}")
 
-            if st.button(f"➡️ Usar {ano} no simulador SISU"):
-
-                st.session_state["notas_exportadas"] = {
-                    "redacao": red_sim,
-                    "humanas": valores["ch"],
-                    "natureza": valores["cn"],
-                    "linguagens": valores["lc"],
-                    "matematica": valores["mt"],
-                }
-
-                st.session_state["aba_atual"] = 1  
-                for key in ["Redação", "Humanas", "Natureza", "Linguagens", "Matemática"]:
-                    if key in st.session_state:
-                        del st.session_state[key]
-                st.rerun()
-
-
 # ========================
-# 🎓 SIMULADOR
+# 🎓 SIMULADOR SISU
 # ========================
-
 
 with aba1:
     st.title("🎓 Simulador SISU")
-    st.write("Veja onde você tem mais chances de passar")
 
     col_filtros, col_notas = st.columns([1, 2])
 
     with col_filtros:
-        st.subheader("🔎 Filtros")
+        uni = st.multiselect("Universidade", sorted(df["universidade"].unique()))
+        df_filtrado = df if not uni else df[df["universidade"].isin(uni)]
 
-        uni = st.multiselect(
-            "Universidade",
-            sorted(df["universidade"].unique()),
-            key="sim_uni"
-        )
-
-        if len(uni) > 0:
-            df_filtrado = df[df["universidade"].isin(uni)]
-        else:
-            df_filtrado = df
-
-        curso = st.multiselect(
-            "Curso",
-            sorted(df_filtrado["curso"].unique()),
-            key="sim_curso"
-        )
-
-        if len(curso) > 0:
+        curso = st.multiselect("Curso", sorted(df_filtrado["curso"].unique()))
+        if curso:
             df_filtrado = df_filtrado[df_filtrado["curso"].isin(curso)]
-    with col_notas:
-        st.subheader("📊 Suas notas")
 
+    with col_notas:
         col1, col2, col3, col4, col5 = st.columns(5)
 
-        # valores padrão
-        red_default = 600.0
-        hum_default = 600.0
-        nat_default = 600.0
-        lin_default = 600.0
-        mat_default = 600.0
-
-        # se vier do simulador de acertos
-        if "notas_exportadas" in st.session_state and st.session_state["aba_atual"] == 1:
-            red_default = st.session_state["notas_exportadas"]["redacao"]
-            hum_default = st.session_state["notas_exportadas"]["humanas"]
-            nat_default = st.session_state["notas_exportadas"]["natureza"]
-            lin_default = st.session_state["notas_exportadas"]["linguagens"]
-            mat_default = st.session_state["notas_exportadas"]["matematica"]
-
-        redacao = col1.number_input("Redação", 0.0, 1000.0, red_default, step=None, key="Redação")
-        humanas = col2.number_input("Humanas", 0.0, 1000.0, hum_default, step=None, key="Humanas")
-        natureza = col3.number_input("Natureza", 0.0, 1000.0, nat_default, step=None, key="Natureza")
-        linguagens = col4.number_input("Linguagens", 0.0, 1000.0, lin_default, step=None, key="Linguagens")
-        matematica = col5.number_input("Matemática", 0.0, 1000.0, mat_default, step=None, key="Matemática")
+        redacao = col1.number_input("Redação", 0.0, 1000.0, 600.0)
+        humanas = col2.number_input("Humanas", 0.0, 1000.0, 600.0)
+        natureza = col3.number_input("Natureza", 0.0, 1000.0, 600.0)
+        linguagens = col4.number_input("Linguagens", 0.0, 1000.0, 600.0)
+        matematica = col5.number_input("Matemática", 0.0, 1000.0, 600.0)
 
     if st.button("🚀 Calcular minhas chances"):
 
@@ -283,43 +202,10 @@ with aba1:
 
         df_result["Diferença"] = df_result["Minha Nota"] - df_result["nota corte"]
 
-        def classificar(d):
-            if d >= 0:
-                return "Alta chance"
-            elif d >= -10:
-                return "Média"
-            else:
-                return "Baixa"
+        df_result["Chance"] = df_result["Diferença"].apply(
+            lambda d: "Alta chance" if d >= 0 else "Média" if d >= -10 else "Baixa"
+        )
 
-        df_result["Chance"] = df_result["Diferença"].apply(classificar)
-
-        df_result["Minha Nota"] = df_result["Minha Nota"].round(1)
-        df_result["Diferença"] = df_result["Diferença"].round(1)
-
-        df_result = df_result.sort_values(by="Diferença", ascending=False)
-
-        # TOP 3
-        st.subheader("🏆 Melhores Opções")
-
-        aprovados = df_result[df_result["Diferença"] >= 0]
-
-        if not aprovados.empty:
-            top3 = aprovados.sort_values(by="nota corte", ascending=False).head(3)
-        else:
-            top3 = df_result.head(3)
-
-        cols = st.columns(3)
-
-        for i, (_, row) in enumerate(top3.iterrows()):
-            with cols[i]:
-                st.metric(
-                    row["curso"],
-                    f"{row['Minha Nota']}",
-                    f"{row['Diferença']} pts"
-                )
-                st.caption(f"{row['universidade']} - {row['campus']}")
-
-        # TABELA
         df_view = df_result[[
             "universidade", "curso", "campus",
             "Minha Nota", "nota corte", "Diferença", "Chance"
@@ -330,49 +216,14 @@ with aba1:
             "nota corte": "Nota de Corte"
         })
 
-        df_alta = df_view[df_view["Chance"] == "Alta chance"]
-        df_media = df_view[df_view["Chance"] == "Média"]
-        df_baixa = df_view[df_view["Chance"] == "Baixa"]
-
-        abas = []
-        nomes = []
-
-        if not df_alta.empty:
-            abas.append(df_alta)
-            nomes.append("🟢 Alta chance")
-
-        if not df_media.empty:
-            abas.append(df_media)
-            nomes.append("🟡 Média")
-
-        if not df_baixa.empty:
-            abas.append(df_baixa)
-            nomes.append("🔴 Baixa")
-
-        st.subheader("📊 Resultados")
-
-        if abas:
-            tabs = st.tabs(nomes)
-
-            for tab, tabela in zip(tabs, abas):
-                with tab:
-                    st.dataframe(tabela, hide_index=True)
-        else:
-            st.warning("Nenhum resultado encontrado com esses filtros.")
-
-        # ========================
-        # PDF DOWNLOAD
-        # ========================
-
-        st.markdown("---")
-        st.subheader("📥 Exportar resultados")
+        st.dataframe(df_view, hide_index=True)
 
         pdf = gerar_pdf(df_view)
 
         st.download_button(
-            label="📄 Baixar tabela em PDF",
+            "📄 Baixar PDF",
             data=pdf,
-            file_name="simulador_sisu.pdf",
+            file_name="resultado.pdf",
             mime="application/pdf"
         )
 
@@ -381,62 +232,20 @@ with aba1:
 # ========================
 
 with aba2:
-
     st.title("⚖️ Pesos dos cursos")
-    st.write("Veja como cada curso calcula sua nota")
 
-    col1, col2 = st.columns(2)
+    uni = st.multiselect("Universidade", sorted(df["universidade"].unique()))
+    df_peso = df if not uni else df[df["universidade"].isin(uni)]
 
-    with col1:
-        uni_peso = st.multiselect(
-            "Universidade",
-            sorted(df["universidade"].unique()),
-            key="peso_uni"
-        )
-
-   
-    if len(uni_peso) == 0:
-        df_peso = df
-    else:
-        df_peso = df[df["universidade"].isin(uni_peso)]
-
-    with col2:
-        curso_peso = st.multiselect(
-            "Curso",
-            sorted(df_peso["curso"].unique()),
-            key="peso_curso"
-        )
-
-  
-    if len(curso_peso) != 0:
-        df_peso = df_peso[df_peso["curso"].isin(curso_peso)]
+    curso = st.multiselect("Curso", sorted(df_peso["curso"].unique()))
+    if curso:
+        df_peso = df_peso[df_peso["curso"].isin(curso)]
 
     tabela_pesos = df_peso[[
         "universidade", "curso", "campus",
         "redacao", "ciencias humanas",
         "ciencias da natureza", "linguagens e codigos",
         "matematica", "soma pesos"
-    ]].rename(columns={
-        "universidade": "Universidade",
-        "curso": "Curso",
-        "campus": "Campus",
-        "redacao": "Redação",
-        "ciencias humanas": "Humanas",
-        "ciencias da natureza": "Natureza",
-        "linguagens e codigos": "Linguagens",
-        "matematica": "Matemática",
-        "soma pesos": "Soma"
-    })
-    st.subheader("📊 Pesos por curso")
-    st.dataframe(tabela_pesos, hide_index=True)
+    ]]
 
-    # Forçar navegação entre abas
-if st.session_state["aba_atual"] == 1:
-    with aba1:
-        pass
-elif st.session_state["aba_atual"] == 2:
-    with aba2:
-        pass
-else:
-    with aba0:
-        pass
+    st.dataframe(tabela_pesos, hide_index=True)
