@@ -138,7 +138,7 @@ aba0, aba1, aba2 = st.tabs([
 with aba0:
 
     st.title("📊 Simulador por número de acertos")
-    st.warning("⚠️ Valores estimados com base nas médias do ENEM 2023 e 2024. Pode haver variações.")
+    st.warning("⚠️ Valores estimados com base nas médias do ENEM 2023 e 2024. Podem haver grandes variações de nota.")
 
     col1, col2, col3, col4, col5 = st.columns(5)
 
