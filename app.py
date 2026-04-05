@@ -171,19 +171,7 @@ with aba0:
             c4.metric("Matemática", round(valores["mt"], 1))
             c5.metric("Redação", round(red_sim, 1))
 
-            # BLOCO COPIAR
-            texto_copia = f"""Redação: {round(red_sim,1)}
-Humanas: {round(valores["ch"],1)}
-Natureza: {round(valores["cn"],1)}
-Linguagens: {round(valores["lc"],1)}
-Matemática: {round(valores["mt"],1)}"""
 
-            with st.expander("📋 Usar no Simulador SISU (copiar fácil)"):
-                st.text_area(
-                    "Copie e cole essas notas no simulador SISU 👉",
-                    texto_copia,
-                    height=150
-                )
 
         st.markdown("---")
         st.info("👉 Dica: copie os valores acima e cole manualmente no Simulador SISU para ver suas chances.")
