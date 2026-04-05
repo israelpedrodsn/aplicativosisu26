@@ -145,19 +145,53 @@ with aba0:
             return None
         return float(linha.iloc[0][col])
 
+    # 2024
+    lc_24 = buscar_nota(ac_lc, "MED_24_LC")
+    ch_24 = buscar_nota(ac_ch, "MED_24_CH")
+    mt_24 = buscar_nota(ac_mt, "MED_24_MT")
+    cn_24 = buscar_nota(ac_cn, "MED_24_CN")
+
+    # 2023
+    lc_23 = buscar_nota(ac_lc, "MED_23_LC")
+    ch_23 = buscar_nota(ac_ch, "MED_23_CH")
+    mt_23 = buscar_nota(ac_mt, "MED_23_MT")
+    cn_23 = buscar_nota(ac_cn, "MED_23_CN")
+
+    # geral
     lc_g = buscar_nota(ac_lc, "MED_GERAL_LC")
     ch_g = buscar_nota(ac_ch, "MED_GERAL_CH")
     mt_g = buscar_nota(ac_mt, "MED_GERAL_MT")
     cn_g = buscar_nota(ac_cn, "MED_GERAL_CN")
 
-    def formatar(v):
-        return "-" if v is None else f"{v:.2f}".replace(".", ",")
+    def formatar(valor):
+        if valor is None:
+            return "-"
+        return f"{valor:.2f}".replace(".", ",")
 
-    st.metric("Linguagens", formatar(lc_g))
-    st.metric("Humanas", formatar(ch_g))
-    st.metric("Matemática", formatar(mt_g))
-    st.metric("Natureza", formatar(cn_g))
-    st.metric("Redação", formatar(red))
+    st.markdown("### 📊 Resultados por área")
+
+    def card_area(nome, n24, n23, ng):
+        st.markdown(f"#### {nome}")
+        c1, c2, c3 = st.columns(3)
+        c1.metric("📅 2024", formatar(n24))
+        c2.metric("📅 2023", formatar(n23))
+        c3.metric("📊 Geral", formatar(ng))
+        st.markdown("---")
+
+    card_area("📚 Linguagens", lc_24, lc_23, lc_g)
+    card_area("🌍 Humanas", ch_24, ch_23, ch_g)
+    card_area("📐 Matemática", mt_24, mt_23, mt_g)
+    card_area("🧪 Natureza", cn_24, cn_23, cn_g)
+
+    st.subheader("✍️ Redação")
+    st.metric("Nota estimada", formatar(red))
+
+    st.info("💡 A coluna 'Geral' é a melhor estimativa para usar no simulador.")
+
+    # ========================
+    # 🚀 INTEGRAÇÃO COM SIMULADOR
+    # ========================
+    st.markdown("### 🚀 Enviar para o simulador")
 
     if st.button("Usar notas gerais no Simulador SISU"):
         if None not in (lc_g, ch_g, mt_g, cn_g):
@@ -166,9 +200,10 @@ with aba0:
             st.session_state["nota_matematica_auto"] = mt_g
             st.session_state["nota_natureza_auto"] = cn_g
             st.session_state["nota_redacao_auto"] = red
+
             st.success("Notas enviadas! Vá para a aba 🎓 Simulador.")
         else:
-            st.error("Preencha corretamente os acertos.")
+            st.error("Preencha corretamente os acertos para gerar as notas.")
 
 # ========================
 # 🎓 SIMULADOR
