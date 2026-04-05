@@ -121,7 +121,7 @@ aba0, aba1, aba2 = st.tabs([
 ])
 
 # ========================
-# 📊 SIMULAÇÃO POR ACERTOS
+# SIMULAÇÃO POR ACERTOS
 # ========================
 with aba0:
     st.title("📊 Simulação por número de acertos")
@@ -184,7 +184,20 @@ with aba0:
             st.error("Preencha corretamente os acertos.")
 
 # ========================
-# 🎓 SIMULADOR
+# BOTÕES AUXILIARES
+# ========================
+col1, col2 = st.columns(2)
+
+with col1:
+    if st.button("Já sei minhas notas no ENEM"):
+        st.info("👉 Vá para a aba 🎓 Simulador para inserir suas notas manualmente.")
+
+with col2:
+    if st.button("Quero descobrir os pesos para um curso"):
+        st.info("👉 Vá para a aba ⚖️ Pesos dos cursos para explorar os pesos.")
+
+# ========================
+# SIMULADOR
 # ========================
 with aba1:
     st.title("🎓 Simulador SISU")
@@ -302,7 +315,7 @@ with aba1:
         )
 
 # ========================
-# ⚖️ PESOS
+#  PESOS
 # ========================
 with aba2:
     st.title("⚖️ Pesos dos cursos")
