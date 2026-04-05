@@ -117,7 +117,7 @@ def gerar_pdf(df):
 aba0, aba1, aba2 = st.tabs([
     "📊 Simular por acertos",
     "🎓 Simulador",
-    "⚖️ Pesos dos cursos"
+    "⚖️ Pesos"
 ])
 
 # ========================
